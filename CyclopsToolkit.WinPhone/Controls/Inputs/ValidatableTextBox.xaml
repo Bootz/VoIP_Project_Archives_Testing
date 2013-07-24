@@ -1,0 +1,66 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:inputs="clr-namespace:CyclopsToolkit.WinPhone.Controls.Inputs"
+    x:Class="CyclopsToolkit.WinPhone.Controls.Inputs.ValidatableTextBox" 
+    mc:Ignorable="d" x:Name="thisControl"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}" Margin="12"
+    Height="Auto" MinHeight="90" HorizontalAlignment="Stretch" MinWidth="100">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent"
+          DataContext="{Binding ElementName=thisControl}"
+          d:DataContext="{d:DesignInstance Type=inputs:ValidatableTextBoxDesignData,IsDesignTimeCreatable=True}"
+          >
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition GeneratedDuration="0:0:1" To="ValidationFailedState">
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="errorBorder">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="90">
+                                    <EasingDoubleKeyFrame.EasingFunction>
+                                        <BackEase EasingMode="EaseOut"/>
+                                    </EasingDoubleKeyFrame.EasingFunction>
+                                </EasingDoubleKeyFrame>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                                    <EasingDoubleKeyFrame.EasingFunction>
+                                        <BackEase EasingMode="EaseOut"/>
+                                    </EasingDoubleKeyFrame.EasingFunction>
+                                </EasingDoubleKeyFrame>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualTransition>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="ValidationFailedState"/>
+                <VisualState x:Name="NormalState">
+                    <Storyboard>
+                        <DoubleAnimation Duration="0" To="90" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="errorBorder" d:IsOptimized="True"/>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" x:Name="textBlockHeader" Foreground="LightGray"
+                   Text="{Binding Header}" Margin="12,0,0,-5" />
+        <Button x:Name="hiddenButton" Height="1" Width="1" Opacity="0"/>
+        <TextBox Grid.Row="1" x:Name="textBoxValue" 
+                 Text="{Binding Text, Mode=TwoWay}" 
+                 KeyDown="TextBoxValueKeyDown">
+        </TextBox>
+        <Border x:Name="errorBorder" Visibility="Collapsed" Grid.Row="2" Background="Red" Margin="11.5,-13,12,0">
+            <Border.Projection>
+                <PlaneProjection CenterOfRotationX="0" RotationX="0" CenterOfRotationZ="-1.2" CenterOfRotationY="0"/>
+            </Border.Projection>
+            <TextBlock Margin="3,1,1,1" VerticalAlignment="Center" Text="Name should be not empty" 
+                       x:Name="errorTextBox" TextTrimming="WordEllipsis" Foreground="White"/>
+        </Border>
+    </Grid>
+</UserControl>
