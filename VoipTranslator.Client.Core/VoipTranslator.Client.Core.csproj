@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AccountManager.cs" />
+    <Compile Include="ApplicationManager.cs" />
     <Compile Include="Common\EnumerableExtensions.cs" />
     <Compile Include="Common\IKeyValueStorage.cs" />
     <Compile Include="Common\ServiceLocator.cs" />

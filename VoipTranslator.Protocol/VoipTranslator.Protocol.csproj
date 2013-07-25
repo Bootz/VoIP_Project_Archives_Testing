@@ -38,6 +38,9 @@
   <ItemGroup>
     <Compile Include="CommandName.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="Dto\AuthenticationResult.cs" />
+    <Compile Include="Dto\AuthenticationResultType.cs" />
+    <Compile Include="Dto\AuthorizationRequest.cs" />
     <Compile Include="Serializers\SimpleCommandSerializer.cs" />
     <Compile Include="ICommandSerializer.cs" />
     <Compile Include="Dto\IncomingCallInfoDTO.cs" />

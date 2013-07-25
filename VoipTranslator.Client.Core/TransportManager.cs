@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using VoipTranslator.Client.Core.Contracts;
 using VoipTranslator.Protocol;
@@ -12,6 +10,7 @@ namespace VoipTranslator.Client.Core
     {
         private readonly ITransportResource _resource;
         private readonly ICommandSerializer _serializer;
+        private readonly Dictionary<long, TaskCompletionSource<Command>> _responseWaiters = new Dictionary<long,TaskCompletionSource<Command>>();
 
         public TransportManager(ITransportResource resource, ICommandSerializer serializer)
         {
@@ -22,19 +21,59 @@ namespace VoipTranslator.Client.Core
 
         private void _resource_OnReceived(object sender, PacketEventArgs e)
         {
-            var command = _serializer.Deserialize(e.Data);
+            try
+            {
+                lock (_responseWaiters)
+                {
+                    var command = _serializer.Deserialize(e.Data);
+                    TaskCompletionSource<Command> taskSource;
+                    if (_responseWaiters.TryGetValue(command.PacketId, out taskSource))
+                    {
+                        taskSource.TrySetResult(command);
+                    }
+                    else
+                    {
+                        //Log
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                //Log
+            }
         }
 
         public Task<Command> SendCommandAndGetAnswerAsync(Command cmd)
         {
-            var data = _serializer.Serialize(cmd);
-            _resource.Send(data);
+            var taskSource = new TaskCompletionSource<Command>();
+            try
+            {
+                lock (_responseWaiters)
+                {
+                    var data = _serializer.Serialize(cmd);
+                    _responseWaiters[cmd.PacketId] = taskSource;
+                    _resource.Send(data);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+                //Log
+            }
+            return taskSource.Task;
         }
 
         public void SendCommand(Command cmd)
         {
-            var data = _serializer.Serialize(cmd);
-            _resource.Send(data);
+            try
+            {
+                var data = _serializer.Serialize(cmd);
+                _resource.Send(data);
+            }
+            catch (Exception)
+            {
+                //Log
+            }
         }
     }
 }

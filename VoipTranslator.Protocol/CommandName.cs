@@ -7,5 +7,6 @@
         Answer,
         VoicePacket,
         IncomingCall,
+        Authorize
     }
 }
