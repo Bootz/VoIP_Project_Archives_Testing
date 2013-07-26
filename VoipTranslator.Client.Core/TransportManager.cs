@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using VoipTranslator.Client.Core.Contracts;
 using VoipTranslator.Protocol;
+using VoipTranslator.Protocol.Serializers;
 
 namespace VoipTranslator.Client.Core
 {
@@ -19,6 +20,8 @@ namespace VoipTranslator.Client.Core
             _resource.Received += _resource_OnReceived;
         }
 
+        public event EventHandler<CommandEventArgs> CommandRecieved = delegate { }; 
+
         private void _resource_OnReceived(object sender, PacketEventArgs e)
         {
             try
@@ -33,7 +36,7 @@ namespace VoipTranslator.Client.Core
                     }
                     else
                     {
-                        //Log
+                        CommandRecieved(this, new CommandEventArgs {Command = command});
                     }
                 }
             }

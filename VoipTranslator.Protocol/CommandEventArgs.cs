@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VoipTranslator.Protocol.Dto
+namespace VoipTranslator.Protocol
 {
-    public class AuthorizationRequest
+    public class CommandEventArgs : EventArgs
     {
-        public string UserId { get; set; }
+        public Command Command { get; set; }
     }
 }

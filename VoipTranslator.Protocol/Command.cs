@@ -12,7 +12,7 @@ namespace VoipTranslator.Protocol
             PacketId = _lastId;
         }
 
-        public Command(CommandName name, object body) : this()
+        public Command(CommandName name, string body) : this()
         {
             Name = name;
             Body = body;
@@ -24,7 +24,7 @@ namespace VoipTranslator.Protocol
 
         public bool IsLast { get; set; }
 
-        public object Body { get; set; }
+        public string Body { get; set; }
 
         public bool Is(CommandName command)
         {
