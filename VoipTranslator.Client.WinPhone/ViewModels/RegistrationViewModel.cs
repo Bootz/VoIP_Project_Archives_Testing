@@ -60,7 +60,7 @@ namespace VoipTranslator.Client.WinPhone.ViewModels
             var success = await _accountManager.Register(Number);
             if (!success)
             {
-                MessageBox.Show("Registration failed.");
+                MessageBox.Show("Invalid number. Please, specify your full number in the following format: +(country code)(service code)(number) (i.e. +375123456789)");
             }
             else
             {

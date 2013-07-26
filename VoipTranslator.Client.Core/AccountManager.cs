@@ -30,7 +30,7 @@ namespace VoipTranslator.Client.Core
 
         public bool IsRegistered
         {
-            get { return !string.IsNullOrEmpty(Number); }
+            get { return !string.IsNullOrEmpty(UserId); }
         }
 
         public async Task<bool> Register(string number)

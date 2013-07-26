@@ -4,26 +4,26 @@ using System.Xml.Serialization;
 
 namespace VoipTranslator.Protocol.Serializers
 {
-    public class XmlCommandSerializer<T> where T : class
+    public class XmlDtoSerializer : IDtoSerializer
     {
-        private readonly XmlSerializer _serializer = new XmlSerializer(typeof(T));
-
-        public T Deserialize(string text)
+        public T Deserialize<T>(string text)
         {
+            var serializer = new XmlSerializer(typeof(T));
             T result;
             using (TextReader reader = new StringReader(text))
             {
-                result = _serializer.Deserialize(reader) as T;
+                result = (T)serializer.Deserialize(reader);
             }
             return result;
         }
 
-        public string Serialize(T cmd)
+        public string Serialize<T>(T obj)
         {
+            var serializer = new XmlSerializer(typeof(T));
             var sb = new StringBuilder();
             using (TextWriter writer = new StringWriter(sb))
             {
-                _serializer.Serialize(writer, cmd);
+                serializer.Serialize(writer, obj);
             }
             return sb.ToString();
         }

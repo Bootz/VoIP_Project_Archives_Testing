@@ -9,7 +9,7 @@ namespace VoipTranslator.Client.WinPhone
     {
         private static bool _wasRun;
 
-        public static async void Run()
+        public static void Run()
         {
             if (_wasRun)
                 return;

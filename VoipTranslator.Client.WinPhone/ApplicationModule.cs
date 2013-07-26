@@ -3,6 +3,7 @@ using CyclopsToolkit.WinPhone.Navigation;
 using VoipTranslator.Client.Core.Common;
 using VoipTranslator.Client.Core.Compasition;
 using VoipTranslator.Client.Core.Contracts;
+using VoipTranslator.Client.Core.Logging;
 using VoipTranslator.Client.WinPhone.Infrastructure;
 using VoipTranslator.Client.WinPhone.Navigation;
 using VoipTranslator.Client.WinPhone.ViewModels;
@@ -22,6 +23,8 @@ namespace VoipTranslator.Client.WinPhone
             builder.RegisterType<VoipTranslatorNavigator>().As<NavigationManagerBase>().SingleInstance();
             builder.RegisterType<KeyValueStorage>().As<IKeyValueStorage>().SingleInstance();
             builder.RegisterType<Dispatcher>().As<IUIDispatcher>().SingleInstance();
+            builder.RegisterType<TransportResource>().As<ITransportResource>().SingleInstance();
+            builder.RegisterType<PhoneLogger>().As<ILogger>().SingleInstance();
 
             _navigationBuilder
                 .RegisterViewModel<RegistrationViewModel>().ForView<RegistrationPage>()

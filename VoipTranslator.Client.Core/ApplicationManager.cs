@@ -22,16 +22,18 @@ namespace VoipTranslator.Client.Core
             _transportManager.CommandRecieved += _transportManager_OnCommandRecieved;
         }
 
+        public event EventHandler RegistrationRequested = delegate { }; 
+
         public async void StartApp()
         {
             if (!_accountManager.IsRegistered)
-            {
-                await _accountManager.RequestRegistration();
-            }
+                throw new InvalidOperationException();
+
             var authResult = await Authorize();
             if (authResult.Result == AuthenticationResultType.NotRegistered)
             {
-                await _accountManager.RequestRegistration();
+                RegistrationRequested(this, EventArgs.Empty);
+                return;
             }
         }
 
@@ -39,10 +41,6 @@ namespace VoipTranslator.Client.Core
         {
             switch (e.Command.Name)
             {
-                case CommandName.VoicePacket:
-                    break;
-                case CommandName.IncomingCall:
-                    break;
             }
         }
 

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VoipTranslator.Client.Core.Contracts
+namespace Voip.Server
 {
-    public class PacketEventArgs : EventArgs
+    public static class Bootstrapper
     {
-        public string Data { get; set; }
+        public static void Run()
+        {
+        }
     }
 }

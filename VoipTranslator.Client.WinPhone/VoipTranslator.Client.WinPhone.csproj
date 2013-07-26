@@ -98,6 +98,8 @@
     <Compile Include="Infrastructure\Dispatcher.cs" />
     <Compile Include="Infrastructure\ContainerBuilderAdapter.cs" />
     <Compile Include="Infrastructure\KeyValueStorage.cs" />
+    <Compile Include="Infrastructure\PhoneLogger.cs" />
+    <Compile Include="Infrastructure\TransportResource.cs" />
     <Compile Include="Navigation\VoipTranslatorNavigator.cs" />
     <Compile Include="Resources\LocalizedStrings.cs" />
     <Compile Include="ViewModels\FrameViewModel.cs" />

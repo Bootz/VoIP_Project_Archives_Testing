@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using VoipTranslator.Protocol.Dto;
 
-namespace VoipTranslator.Client.Core.Contracts
+namespace VoipTranslator.Server.Interfaces
 {
     public interface ITransportResource
     {

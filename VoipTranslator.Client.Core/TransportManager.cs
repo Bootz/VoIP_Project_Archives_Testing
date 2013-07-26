@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using VoipTranslator.Client.Core.Contracts;
 using VoipTranslator.Protocol;
+using VoipTranslator.Protocol.Dto;
 using VoipTranslator.Protocol.Serializers;
 
 namespace VoipTranslator.Client.Core
