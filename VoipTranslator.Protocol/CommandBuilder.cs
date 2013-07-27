@@ -17,6 +17,12 @@ namespace VoipTranslator.Protocol
             return new Command(name, bodyString);
         }
 
+        public void ChangeUnderlyingObject<T>(Command cmd, T obj)
+        {
+            string bodyString = _dtoSerializer.Serialize(obj);
+            cmd.Body = bodyString;
+        }
+
         public T GetUnderlyingObject<T>(Command cmd)
         {
             return _dtoSerializer.Deserialize<T>(cmd.Body);

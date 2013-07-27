@@ -44,12 +44,12 @@
     <Compile Include="ServerAddress.cs" />
     <Compile Include="Dto\AuthenticationResult.cs" />
     <Compile Include="Dto\AuthenticationResultType.cs" />
-    <Compile Include="Dto\AuthorizationRequest.cs" />
+    <Compile Include="Dto\AuthenticationRequest.cs" />
     <Compile Include="Dto\RegistrationRequest.cs" />
     <Compile Include="Dto\RegistrationResult.cs" />
     <Compile Include="Dto\RegistrationResultType.cs" />
     <Compile Include="Serializers\IDtoSerializer.cs" />
-    <Compile Include="Serializers\SimpleCommandSerializer.cs" />
+    <Compile Include="Serializers\CommandSerializer.cs" />
     <Compile Include="Serializers\ICommandSerializer.cs" />
     <Compile Include="Dto\IncomingCallInfoDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

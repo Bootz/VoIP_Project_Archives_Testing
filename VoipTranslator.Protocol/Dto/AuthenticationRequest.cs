@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VoipTranslator.Server
+namespace VoipTranslator.Protocol.Dto
 {
-    class ApplicationService
+    public class AuthenticationRequest
     {
+        public string UserId { get; set; }
     }
 }

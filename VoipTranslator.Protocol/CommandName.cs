@@ -8,6 +8,6 @@
         VoicePacket,
         IncomingCall,
         Register,
-        Authorize
+        Authentication
     }
 }

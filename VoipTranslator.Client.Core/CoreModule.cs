@@ -14,7 +14,7 @@ namespace VoipTranslator.Client.Core
             builder.RegisterType<TransportManager>().AsSelf().SingleInstance();
             builder.RegisterType<CallsManager>().AsSelf().SingleInstance();
             builder.RegisterType<CommandBuilder>().AsSelf().SingleInstance();
-            builder.RegisterType<SimpleCommandSerializer>().As<ICommandSerializer>().SingleInstance();
+            builder.RegisterType<CommandSerializer>().As<ICommandSerializer>().SingleInstance();
             builder.RegisterType<XmlDtoSerializer>().As<IDtoSerializer>().SingleInstance();
 
 

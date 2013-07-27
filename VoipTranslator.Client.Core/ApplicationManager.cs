@@ -46,8 +46,8 @@ namespace VoipTranslator.Client.Core
 
         private async Task<AuthenticationResult> Authorize()
         {
-            var request = new AuthorizationRequest { UserId = _accountManager.UserId };
-            Command requestCmd = _commandBuilder.Create(CommandName.Authorize, request);
+            var request = new AuthenticationRequest { UserId = _accountManager.UserId };
+            Command requestCmd = _commandBuilder.Create(CommandName.Authentication, request);
             Command replyCmd = await _transportManager.SendCommandAndGetAnswerAsync(requestCmd);
             var result = _commandBuilder.GetUnderlyingObject<AuthenticationResult>(replyCmd);
             return result;

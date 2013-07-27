@@ -7,8 +7,8 @@
     <ProjectGuid>{466C68C4-3126-46C0-AEFF-6A2110AF2CAA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Voip.Server</RootNamespace>
-    <AssemblyName>Voip.Server</AssemblyName>
+    <RootNamespace>Voip.Server.ConsoleHost</RootNamespace>
+    <AssemblyName>Voip.Server.ConsoleHost</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetPlatformVersion>8.0</TargetPlatformVersion>
     <FileAlignment>512</FileAlignment>
@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\Dependencies\Autofac\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO" />
@@ -60,6 +63,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VoipTranslator.Server.Infrastructure\VoipTranslator.Server.Infrastructure.csproj">
+      <Project>{1FABF1E0-5D9F-42E1-BFF3-7B108FC5FE66}</Project>
+      <Name>VoipTranslator.Server.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VoipTranslator.Server\VoipTranslator.Server.csproj">
+      <Project>{5601fe56-6010-48d8-9185-a4a96021b5bb}</Project>
+      <Name>VoipTranslator.Server</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
