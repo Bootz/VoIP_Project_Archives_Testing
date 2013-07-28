@@ -2,7 +2,6 @@
 using System.Linq;
 using VoipTranslator.Protocol;
 using VoipTranslator.Protocol.Dto;
-using VoipTranslator.Server.Domain;
 using VoipTranslator.Server.Entities;
 using VoipTranslator.Server.Interfaces;
 
@@ -44,8 +43,8 @@ namespace VoipTranslator.Server
             var result = new RegistrationResult();
 
             if (string.IsNullOrEmpty(request.Number) ||
-                remoteUser.User.Number.Length < 4 ||
-                remoteUser.User.Number.Trim(' ', '+').ToCharArray().Any(i => !char.IsDigit(i)))
+                request.Number.Length < 4 ||
+                request.Number.Trim(' ', '+').ToCharArray().Any(i => !char.IsDigit(i)))
             {
                 result.Result = RegistrationResultType.NotRegistered;
             }

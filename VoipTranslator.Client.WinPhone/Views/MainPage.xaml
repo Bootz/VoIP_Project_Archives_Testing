@@ -47,9 +47,10 @@
                             <Button Margin="-12,-12,-11,-12"
                                     HorizontalAlignment="Stretch" Content="call" 
                                     Style="{StaticResource DialerButtonStyle}" FontSize="36" FontWeight="Normal"
+                                    Command="{Binding CallCommand}"
                                     Background="Green"/>
-                            
-                            <TextBlock Grid.Column="1" Margin="12,20,24,24" FontSize="36" Text="+375291089630"/>
+
+                            <TextBlock Grid.Column="1" Margin="12,20,24,24" FontSize="36" Text="{Binding Number, Mode=TwoWay}"/>
                         </Grid>
                         <Grid Grid.Row="1" Height="480" Margin="6,15,6,0">
                             <Grid.RowDefinitions>
@@ -64,25 +65,24 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Row="0" Grid.Column="0" Content="1" Style="{StaticResource DialerButtonStyle}"/>
-                            <Button Grid.Row="0" Grid.Column="1" Content="2" Style="{StaticResource DialerButtonStyle}"/>
-                            <Button Grid.Row="0" Grid.Column="2" Content="3" Style="{StaticResource DialerButtonStyle}"/>
+                            <Button Grid.Row="0" Grid.Column="0" Content="1" Style="{StaticResource DialerButtonStyle}" Command="{Binding KeyCommand}" CommandParameter="1"/>
+                            <Button Grid.Row="0" Grid.Column="1" Content="2" Style="{StaticResource DialerButtonStyle}" Command="{Binding KeyCommand}" CommandParameter="2"/>
+                            <Button Grid.Row="0" Grid.Column="2" Content="3" Style="{StaticResource DialerButtonStyle}" Command="{Binding KeyCommand}" CommandParameter="3"/>
 
-                            <Button Grid.Row="1" Grid.Column="0" Content="4" Style="{StaticResource DialerButtonStyle}"/>
-                            <Button Grid.Row="1" Grid.Column="1" Content="5" Style="{StaticResource DialerButtonStyle}"/>
-                            <Button Grid.Row="1" Grid.Column="2" Content="6" Style="{StaticResource DialerButtonStyle}"/>
+                            <Button Grid.Row="1" Grid.Column="0" Content="4" Style="{StaticResource DialerButtonStyle}" Command="{Binding KeyCommand}" CommandParameter="4"/>
+                            <Button Grid.Row="1" Grid.Column="1" Content="5" Style="{StaticResource DialerButtonStyle}" Command="{Binding KeyCommand}" CommandParameter="5"/>
+                            <Button Grid.Row="1" Grid.Column="2" Content="6" Style="{StaticResource DialerButtonStyle}" Command="{Binding KeyCommand}" CommandParameter="6"/>
 
-                            <Button Grid.Row="2" Grid.Column="0" Content="7" Style="{StaticResource DialerButtonStyle}"/>
-                            <Button Grid.Row="2" Grid.Column="1" Content="8" Style="{StaticResource DialerButtonStyle}"/>
-                            <Button Grid.Row="2" Grid.Column="2" Content="9" Style="{StaticResource DialerButtonStyle}"/>
+                            <Button Grid.Row="2" Grid.Column="0" Content="7" Style="{StaticResource DialerButtonStyle}" Command="{Binding KeyCommand}" CommandParameter="7"/>
+                            <Button Grid.Row="2" Grid.Column="1" Content="8" Style="{StaticResource DialerButtonStyle}" Command="{Binding KeyCommand}" CommandParameter="8"/>
+                            <Button Grid.Row="2" Grid.Column="2" Content="9" Style="{StaticResource DialerButtonStyle}" Command="{Binding KeyCommand}" CommandParameter="9"/>
 
-                            <Button Grid.Row="3" Grid.Column="0" Content="#" Style="{StaticResource DialerButtonStyle}"/>
-                            <Button Grid.Row="3" Grid.Column="1" Content="0" Style="{StaticResource DialerButtonStyle}"/>
-                            <Button Grid.Row="3" Grid.Column="2" Content="+" Style="{StaticResource DialerButtonStyle}"/>
-                            <Button Grid.Row="2" Grid.Column="2" Content="9" Style="{StaticResource DialerButtonStyle}"/>
+                            <Button Grid.Row="3" Grid.Column="0" Content="#" Style="{StaticResource DialerButtonStyle}" Command="{Binding KeyCommand}" CommandParameter="#"/>
+                            <Button Grid.Row="3" Grid.Column="1" Content="0" Style="{StaticResource DialerButtonStyle}" Command="{Binding KeyCommand}" CommandParameter="0"/>
+                            <Button Grid.Row="3" Grid.Column="2" Content="+" Style="{StaticResource DialerButtonStyle}" Command="{Binding KeyCommand}" CommandParameter="+"/>
 
-                            <Button Grid.Row="4" Grid.Column="0" Content="&lt;" Style="{StaticResource DialerButtonStyle}"/>
-                            <Button Grid.Row="4" Grid.Column="2" Content="X" Style="{StaticResource DialerButtonStyle}"/>
+                            <Button Grid.Row="4" Grid.Column="0" Content="&lt;" Style="{StaticResource DialerButtonStyle}" Command="{Binding BackspaceCommand}"/>
+                            <Button Grid.Row="4" Grid.Column="2" Content="X" Style="{StaticResource DialerButtonStyle}" Command="{Binding ClearCommand}"/>
 
                         </Grid>
                     </Grid>

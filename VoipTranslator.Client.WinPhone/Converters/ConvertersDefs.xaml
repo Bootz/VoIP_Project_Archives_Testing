@@ -1,0 +1,19 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:converters="clr-namespace:CyclopsToolkit.WinPhone.Converters;assembly=CyclopsToolkit.WinPhone">
+
+
+    <Visibility x:Key="CollapsedVisibility">Collapsed</Visibility>
+    <Visibility x:Key="VisibleVisibility">Visible</Visibility>
+    <sys:Boolean x:Key="TrueBoolean">True</sys:Boolean>
+    <sys:Boolean x:Key="FalseBoolean">False</sys:Boolean>
+
+
+    <converters:BooleanToValueConverter x:Key="TrueToCollapsedConverter" ValueForTrue="{StaticResource CollapsedVisibility}" ValueForFalse="{StaticResource VisibleVisibility}"/>
+    <converters:BooleanToValueConverter x:Key="TrueToVisibleConverter" ValueForTrue="{StaticResource VisibleVisibility}" ValueForFalse="{StaticResource CollapsedVisibility}"/>
+
+</ResourceDictionary>

@@ -119,7 +119,7 @@ namespace VoipTranslator.Client.WinPhone
             // Create the frame but don't set it as RootVisual yet; this allows the splash
             // screen to remain active until the application is ready to render.
             RootFrame = new PhoneApplicationFrame();
-            //RootFrame.Style = this.Resources["defaultFrameStyle"] as Style;
+            RootFrame.Style = this.Resources["MainFrameStyle"] as Style;
             RootFrame.Navigated += CompleteInitializePhoneApplication;
 
             // Handle navigation failures

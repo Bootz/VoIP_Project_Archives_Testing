@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VoipTranslator.Client.Core.Contracts;
+using VoipTranslator.Client.Core.Logging;
 using VoipTranslator.Protocol;
 using VoipTranslator.Protocol.Dto;
 using VoipTranslator.Protocol.Serializers;
@@ -10,6 +11,8 @@ namespace VoipTranslator.Client.Core
 {
     public class TransportManager
     {
+        //TODO: keep alive
+        private static readonly ILogger Logger = LogFactory.GetLogger<ILogger>();
         private readonly ITransportResource _resource;
         private readonly ICommandSerializer _serializer;
         private readonly Dictionary<long, TaskCompletionSource<Command>> _responseWaiters = new Dictionary<long,TaskCompletionSource<Command>>();

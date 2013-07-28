@@ -1,4 +1,4 @@
-﻿namespace VoipTranslator.Server.Domain
+﻿namespace VoipTranslator.Server.Entities
 {
     public class User
     {

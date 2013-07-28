@@ -44,9 +44,9 @@ namespace VoipTranslator.Client.Core
             if (result.Result == RegistrationResultType.Success)
             {
                 _storage.SetValue(NumberKey, number);
-                _storage.SetValue(UserId, result.UserId);
+                _storage.SetValue(UserIdKey, result.UserId);
                 Number = number;
-                UserId = UserId;
+                UserId = result.UserId;
                 return true;
             }
             return false;

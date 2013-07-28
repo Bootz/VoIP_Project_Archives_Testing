@@ -1,4 +1,4 @@
-﻿using VoipTranslator.Server.Domain;
+﻿using VoipTranslator.Server.Entities;
 
 namespace VoipTranslator.Server.Interfaces
 {

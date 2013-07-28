@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using VoipTranslator.Protocol;
 using VoipTranslator.Protocol.Dto;
 using VoipTranslator.Protocol.Serializers;
-using VoipTranslator.Server.Domain;
 using VoipTranslator.Server.Entities;
 using VoipTranslator.Server.Interfaces;
 using VoipTranslator.Server.Logging;

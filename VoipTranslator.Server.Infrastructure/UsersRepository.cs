@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using VoipTranslator.Server.Domain;
+using VoipTranslator.Server.Entities;
 using VoipTranslator.Server.Interfaces;
 
 namespace VoipTranslator.Server.Infrastructure

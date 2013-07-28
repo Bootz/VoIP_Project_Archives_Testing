@@ -28,7 +28,7 @@ namespace VoipTranslator.Client.WinPhone
 
             _navigationBuilder
                 .RegisterViewModel<RegistrationViewModel>().ForView<RegistrationPage>()
-                .RegisterViewModel<MainViewModel>().ForView<MainPage>()
+                .RegisterViewModel<MainViewModel>().Singleton().ForView<MainPage>()
                 .RegisterViewModel<FrameViewModel>().StaticResource().WithoutView()
                 ;
 
