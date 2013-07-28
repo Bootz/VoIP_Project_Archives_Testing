@@ -5,8 +5,6 @@ namespace VoipTranslator.Server.Interfaces
 {
     public interface ITransportResource
     {
-        void Send(string data);
-
-        event EventHandler<PacketEventArgs> Received;
+        event EventHandler<PeerCommandEventArgs> Received;
     }
 }

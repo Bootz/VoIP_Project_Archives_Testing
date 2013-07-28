@@ -24,7 +24,10 @@ namespace VoipTranslator.Client.WinPhone.ViewModels
             if (string.IsNullOrWhiteSpace(arg))
                 return "Number is empty";
 
-            if (arg.Any(i => !char.IsDigit(i)))
+            if (!arg.StartsWith("+"))
+                return "Number should start with '+'";
+
+            if (arg.Remove(0, 1).Any(i => !char.IsDigit(i)))
                 return "Number contains invalid symbols";
 
             if (arg.Length < 3)

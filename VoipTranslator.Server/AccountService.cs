@@ -3,6 +3,7 @@ using System.Linq;
 using VoipTranslator.Protocol;
 using VoipTranslator.Protocol.Dto;
 using VoipTranslator.Server.Domain;
+using VoipTranslator.Server.Entities;
 using VoipTranslator.Server.Interfaces;
 
 namespace VoipTranslator.Server
@@ -20,47 +21,47 @@ namespace VoipTranslator.Server
             _commandBuilder = commandBuilder;
             _connectionsManager = connectionsManager;
             _usersRepository = usersRepository;
-            _connectionsManager.CommandRecieved += _connectionsManager_CommandRecieved;
+            _connectionsManager.CommandRecieved += _connectionsManager_OnCommandRecieved;
         }
 
-        private void _connectionsManager_CommandRecieved(object sender, Interfaces.UserCommandEventArgs e)
+        private void _connectionsManager_OnCommandRecieved(object sender, Interfaces.RemoteUserCommandEventArgs e)
         {
             switch (e.Command.Name)
             {
                 case CommandName.Register:
-                    HandleRegistration(e.User, e.Command);
+                    HandleRegistration(e.RemoteUser, e.Command);
                     break;
 
                 case CommandName.Authentication:
-                    HandleAuthentication(e.User, e.Command);
+                    HandleAuthentication(e.RemoteUser, e.Command);
                     break;
             }
         }
 
-        private void HandleRegistration(User user, Command command)
+        private async void HandleRegistration(RemoteUser remoteUser, Command command)
         {
             var request = _commandBuilder.GetUnderlyingObject<RegistrationRequest>(command);
             var result = new RegistrationResult();
 
             if (string.IsNullOrEmpty(request.Number) ||
-                user.Number.Length < 4 ||
-                user.Number.Trim(' ', '+').ToCharArray().Any(i => !char.IsDigit(i)))
+                remoteUser.User.Number.Length < 4 ||
+                remoteUser.User.Number.Trim(' ', '+').ToCharArray().Any(i => !char.IsDigit(i)))
             {
                 result.Result = RegistrationResultType.NotRegistered;
             }
             else
             {
-                user.Number = request.Number;
-                user.UserId = Guid.NewGuid().ToString();
-                _usersRepository.Add(user);
+                remoteUser.User.Number = request.Number;
+                remoteUser.User.UserId = Guid.NewGuid().ToString();
+                _usersRepository.Add(remoteUser.User);
                 result.Result = RegistrationResultType.Success;
-                result.UserId = user.UserId;
+                result.UserId = remoteUser.User.UserId;
             }
             _commandBuilder.ChangeUnderlyingObject(command, result);
-            _connectionsManager.SendCommand(user, command);
+            await remoteUser.Peer.SendCommand(command);
         }
 
-        private void HandleAuthentication(User user, Command command)
+        private async void HandleAuthentication(RemoteUser remoteUser, Command command)
         {
             var request = _commandBuilder.GetUnderlyingObject<AuthenticationRequest>(command);
             var result = new AuthenticationResult();
@@ -69,7 +70,7 @@ namespace VoipTranslator.Server
             result.Result = exists ? AuthenticationResultType.Success : AuthenticationResultType.NotRegistered;
 
             _commandBuilder.ChangeUnderlyingObject(command, result);
-            _connectionsManager.SendCommand(user, command);
+            await remoteUser.Peer.SendCommand(command);
         }
     }
 }

@@ -7,18 +7,21 @@ using VoipTranslator.Protocol;
 using VoipTranslator.Protocol.Dto;
 using VoipTranslator.Protocol.Serializers;
 using VoipTranslator.Server.Domain;
+using VoipTranslator.Server.Entities;
 using VoipTranslator.Server.Interfaces;
+using VoipTranslator.Server.Logging;
 
 namespace VoipTranslator.Server
 {
     public class ConnectionsManager
     {
+        private static readonly ILogger Logger = LogFactory.GetLogger<ConnectionsManager>();
         private readonly ICommandSerializer _serializer;
         private readonly Dictionary<long, TaskCompletionSource<Command>> _responseWaiters = new Dictionary<long, TaskCompletionSource<Command>>();
         private readonly ITransportResource _resource;
         private readonly IUsersRepository _userRepository;
         private Timer _timer;
-        private readonly Dictionary<User, DateTime> _activeConnections = new Dictionary<User, DateTime>();
+        private readonly Dictionary<RemoteUser, DateTime> _activeConnections = new Dictionary<RemoteUser, DateTime>();
         
         private static readonly TimeSpan TimerInterval = TimeSpan.FromSeconds(3);
         private static readonly TimeSpan ConnectionTimeout = TimeSpan.FromSeconds(30);
@@ -31,38 +34,18 @@ namespace VoipTranslator.Server
             _userRepository = userRepository;
             _serializer = serializer;
             _resource.Received += _resource_OnReceived;
-            _timer = new Timer(OnTimerTick, null, (int)TimerInterval.TotalMilliseconds, (int)TimerInterval.TotalMilliseconds);
+            _timer = new Timer(OnTimerTick, null, TimerInterval);
         }
 
-        public event EventHandler<UserCommandEventArgs> CommandRecieved = delegate { };
+        public event EventHandler<RemoteUserCommandEventArgs> CommandRecieved = delegate { };
 
-        public IReadOnlyCollection<User> ActiveConnections
+        public IReadOnlyCollection<RemoteUser> ActiveConnections
         {
             get
             {
                 lock (_activeConnections)
-                {
-                    return new ReadOnlyCollection<User>(_activeConnections.Keys.ToList()); 
-                }
+                    return new ReadOnlyCollection<RemoteUser>(_activeConnections.Keys.ToList()); 
             }
-        }
-
-        public void SendCommand(User user, Command cmd)
-        {
-            try
-            {
-                var data = _serializer.Serialize(cmd);
-                _resource.Send(data);
-            }
-            catch (Exception)
-            {
-                //Log
-            }
-        }
-
-        public Task SendCommandAndWaitAckAsync(User user, Command cmd)
-        {
-            return null;
         }
 
         private void OnTimerTick(object state)
@@ -72,12 +55,13 @@ namespace VoipTranslator.Server
                 var timeoutedConnections = _activeConnections.Where(i => (DateTime.Now - i.Value) > ConnectionTimeout).ToList();
                 foreach (var timeoutedConnection in timeoutedConnections)
                 {
+                    Logger.Trace("Closing connection due to timeout");
                     _activeConnections.Remove(timeoutedConnection.Key);
                 }
             }
         }
 
-        private void _resource_OnReceived(object sender, PacketEventArgs e)
+        private void _resource_OnReceived(object sender, PeerCommandEventArgs e)
         {
             try
             {
@@ -85,22 +69,22 @@ namespace VoipTranslator.Server
                 {
                     var command = _serializer.Deserialize(e.Data);
                     var user = _userRepository.GetById(command.UserId);
+                    RemoteUser remoteUser;
                     if (user != null)
                     {
-                        _activeConnections[user] = DateTime.Now;
+                        remoteUser = new RemoteUser(user, e.Peer);
+                        _activeConnections[remoteUser] = DateTime.Now;
                     }
                     else
                     {
-                        user = new User();
+                        remoteUser = new RemoteUser(new User(), e.Peer);
                     }
-                    user.Address = e.RemotePeerAddress;
-                    user.Port = e.RemotePeerPort;
-                    CommandRecieved(this, new UserCommandEventArgs { Command = command, User = user });
+                    CommandRecieved(this, new RemoteUserCommandEventArgs { Command = command, RemoteUser = remoteUser });
                 }
             }
-            catch (Exception)
+            catch (Exception exc)
             {
-                //Log
+                Logger.Exception(exc, "_resource_OnReceived");
             }
         }
     }

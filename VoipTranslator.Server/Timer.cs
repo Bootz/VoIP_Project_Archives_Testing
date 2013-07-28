@@ -1,26 +1,31 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace VoipTranslator.Server
 {
     internal delegate void TimerCallback(object state);
 
-    internal sealed class Timer : CancellationTokenSource, IDisposable
+    internal sealed class Timer
     {
-        internal Timer(TimerCallback callback, object state, int dueTime, int period)
+        private readonly TimerCallback _callback;
+        private readonly object _state;
+        private readonly TimeSpan _interval;
+
+        internal Timer(TimerCallback callback, object state, TimeSpan interval)
         {
-            Contract.Assert(period == -1, "This stub implementation only supports dueTime.");
-            Task.Delay(dueTime, Token).ContinueWith((t, s) =>
-            {
-                var tuple = (Tuple<TimerCallback, object>)s;
-                tuple.Item1(tuple.Item2);
-            }, Tuple.Create(callback, state), CancellationToken.None,
-                TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnRanToCompletion,
-                TaskScheduler.Default);
+            _callback = callback;
+            _state = state;
+            _interval = interval;
+            StartTimer();
         }
 
-        public new void Dispose() { base.Cancel(); }
+        private async void StartTimer()
+        {
+            while (true)
+            {
+                await Task.Delay(_interval).ConfigureAwait(false);
+                _callback(_state);
+            }
+        }
     }
 }

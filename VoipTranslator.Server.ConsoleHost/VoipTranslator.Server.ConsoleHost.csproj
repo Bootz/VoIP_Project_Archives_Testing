@@ -39,9 +39,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO" />
-    <Reference Include="System.Net.NetworkInformation" />
-    <Reference Include="System.Net.Primitives" />
-    <Reference Include="System.Net.Requests" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.InteropServices.WindowsRuntime" />
     <Reference Include="System.Runtime.WindowsRuntime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -49,11 +46,6 @@
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETCore\v4.5\System.Runtime.WindowsRuntime.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="Windows" />
   </ItemGroup>
   <ItemGroup>
@@ -65,8 +57,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VoipTranslator.Protocol\VoipTranslator.Protocol.csproj">
+      <Project>{0fd033d5-7bfa-42bc-a7b7-90d764eddf1a}</Project>
+      <Name>VoipTranslator.Protocol</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VoipTranslator.Server.Infrastructure\VoipTranslator.Server.Infrastructure.csproj">
-      <Project>{1FABF1E0-5D9F-42E1-BFF3-7B108FC5FE66}</Project>
+      <Project>{1fabf1e0-5d9f-42e1-bff3-7b108fc5fe66}</Project>
       <Name>VoipTranslator.Server.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\VoipTranslator.Server\VoipTranslator.Server.csproj">

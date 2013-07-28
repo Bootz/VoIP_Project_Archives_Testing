@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using Autofac;
+using VoipTranslator.Protocol;
+using VoipTranslator.Protocol.Serializers;
 using VoipTranslator.Server;
 using VoipTranslator.Server.Infrastructure;
-using VoipTranslator.Server.Interfaces;
 
 namespace Voip.Server.ConsoleHost
 {
@@ -24,11 +25,18 @@ namespace Voip.Server.ConsoleHost
                     new CoreModule(),
                 };
 
-            modules.ForEach(builder.RegisterModule);
+            foreach (var module in modules)
+            {
+                builder.RegisterModule(module);
+            }
 
             var container = builder.Build();
             ServiceLocator.Init(container);
-            container.Resolve<ITransportResource>();
+            container.Resolve<ConnectionsManager>();
+
+            container.Resolve<CommandBuilder>().Create(CommandName.Dial, 3);
+            var cmd = container.Resolve<ICommandSerializer>().Serialize(new VoipTranslator.Protocol.Command { Body = "ddd "});
+            var c = container.Resolve<ICommandSerializer>().Deserialize(cmd);
         }
     }
 }

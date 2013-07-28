@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5601FE56-6010-48D8-9185-A4A96021B5BB}</ProjectGuid>
@@ -46,10 +46,13 @@
     <Compile Include="AccountService.cs" />
     <Compile Include="ConnectionsManager.cs" />
     <Compile Include="CoreModule.cs" />
-    <Compile Include="Domain\User.cs" />
+    <Compile Include="Entities\RemoteUser.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Interfaces\IPushSender.cs" />
+    <Compile Include="Interfaces\IRemotePeer.cs" />
     <Compile Include="Interfaces\ITransportResource.cs" />
-    <Compile Include="Interfaces\UserCommandEventArgs.cs" />
+    <Compile Include="Interfaces\PeerCommandEventArgs.cs" />
+    <Compile Include="Interfaces\RemoteUserCommandEventArgs.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
