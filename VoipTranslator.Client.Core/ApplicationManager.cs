@@ -39,9 +39,9 @@ namespace VoipTranslator.Client.Core
 
         private void _transportManager_OnCommandRecieved(object sender, CommandEventArgs e)
         {
-            switch (e.Command.Name)
-            {
-            }
+            //switch (e.Command.Name)
+            //{
+            //}
         }
 
         private async Task<AuthenticationResult> Authorize()

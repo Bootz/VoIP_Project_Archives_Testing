@@ -25,6 +25,7 @@ namespace VoipTranslator.Client.WinPhone
             builder.RegisterType<Dispatcher>().As<IUIDispatcher>().SingleInstance();
             builder.RegisterType<TransportResource>().As<ITransportResource>().SingleInstance();
             builder.RegisterType<PhoneLogger>().As<ILogger>().SingleInstance();
+            builder.RegisterType<AudioDeviceResource>().As<IAudioDeviceResource>().SingleInstance();
 
             _navigationBuilder
                 .RegisterViewModel<RegistrationViewModel>().ForView<RegistrationPage>()

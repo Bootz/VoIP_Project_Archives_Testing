@@ -12,11 +12,14 @@ namespace VoipTranslator.Client.WinPhone.ViewModels
     public class MainViewModel : ViewModelBaseEx
     {
         private readonly ApplicationManager _appManager;
+        private readonly CallsManager _callsManager;
         private string _number;
 
-        public MainViewModel(ApplicationManager appManager)
+        public MainViewModel(ApplicationManager appManager,
+            CallsManager callsManager)
         {
             _appManager = appManager;
+            _callsManager = callsManager;
             _appManager.StartApp();
         }
 
@@ -46,12 +49,11 @@ namespace VoipTranslator.Client.WinPhone.ViewModels
             get { return new RelayCommand(OnCall); }
         }
 
-        private void OnCall()
+        private async void OnCall()
         {
-            //TODO: validate
             IsBusy = !IsBusy;
-
-            //IsBusy = false;
+            await _callsManager.Dial(Number);
+            IsBusy = false;
         }
 
         private void BackspacePressed()

@@ -8,6 +8,7 @@
         VoicePacket,
         IncomingCall,
         Register,
-        Authentication
+        Authentication,
+        EndCall
     }
 }

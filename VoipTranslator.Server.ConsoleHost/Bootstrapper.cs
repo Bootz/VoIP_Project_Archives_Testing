@@ -33,6 +33,7 @@ namespace Voip.Server.ConsoleHost
             var container = builder.Build();
             ServiceLocator.Init(container);
             container.Resolve<AccountService>();
+            container.Resolve<VoiceManager>();
 
             container.Resolve<CommandBuilder>().Create(CommandName.Dial, 3);
             var cmd = container.Resolve<ICommandSerializer>().Serialize(new VoipTranslator.Protocol.Command { Body = "ddd "});

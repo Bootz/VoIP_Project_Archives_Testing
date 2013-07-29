@@ -18,11 +18,18 @@ namespace VoipTranslator.Server.Entities
             var ru = obj as RemoteUser;
             if (ru == null)
                 return false;
+
+            if (User == null || string.IsNullOrEmpty(User.UserId))
+                return Peer.Equals(ru.Peer);
+
             return ru.User.Equals(User);
         }
 
         public override int GetHashCode()
         {
+            if (User == null || string.IsNullOrEmpty(User.UserId))
+                return Peer.GetHashCode();
+
             return User.GetHashCode();
         }
     }

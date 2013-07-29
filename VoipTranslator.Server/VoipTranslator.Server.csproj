@@ -59,6 +59,7 @@
     <Compile Include="Interfaces\IUsersRepository.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="Timer.cs" />
+    <Compile Include="VoiceManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VoipTranslator.Protocol\VoipTranslator.Protocol.csproj">

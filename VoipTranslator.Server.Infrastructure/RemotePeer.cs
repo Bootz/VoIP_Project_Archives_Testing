@@ -21,6 +21,7 @@ namespace VoipTranslator.Server.Infrastructure
             _dataWriter = new DataWriter(stream);
             HostName = host.RawName;
             Port = port;
+            UpdateLastActivity();
         }
 
         public async Task SendCommand(Command command)
@@ -42,5 +43,25 @@ namespace VoipTranslator.Server.Infrastructure
         public string HostName { get; private set; }
 
         public string Port { get; private set; }
+
+        public DateTime LastActivity { get; private set; }
+
+        public void UpdateLastActivity()
+        {
+            LastActivity = DateTime.Now;
+        }
+
+        public override int GetHashCode()
+        {
+            return HostName.GetHashCode() ^ Port.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            var peer = obj as RemotePeer;
+            if (peer == null)
+                return false;
+            return peer.HostName == HostName && peer.Port == Port;
+        }
     }
 }

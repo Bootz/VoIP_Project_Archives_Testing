@@ -14,5 +14,9 @@ namespace VoipTranslator.Server.Interfaces
         string HostName { get; }
 
         string Port { get; }
+
+        DateTime LastActivity { get; }
+
+        void UpdateLastActivity();
     }
 }

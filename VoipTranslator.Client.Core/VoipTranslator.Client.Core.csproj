@@ -41,6 +41,9 @@
     <Compile Include="Common\ServiceLocator.cs" />
     <Compile Include="Common\StringExtensions.cs" />
     <Compile Include="Compasition\LayerModule.cs" />
+    <Compile Include="Contracts\BinaryDataEventsArgs.cs" />
+    <Compile Include="Contracts\CallEventsArgs.cs" />
+    <Compile Include="Contracts\IAudioDeviceResource.cs" />
     <Compile Include="Contracts\ITransportResource.cs" />
     <Compile Include="Contracts\IUIDispatcher.cs" />
     <Compile Include="CoreModule.cs" />
@@ -54,9 +57,7 @@
       <HintPath>..\Dependencies\Autofac\Autofac.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domain\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\VoipTranslator.Protocol\VoipTranslator.Protocol.csproj">
       <Project>{0FD033D5-7BFA-42BC-A7B7-90D764EDDF1A}</Project>

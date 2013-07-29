@@ -20,10 +20,10 @@ namespace VoipTranslator.Server
         private readonly ITransportResource _resource;
         private readonly IUsersRepository _userRepository;
         private Timer _timer;
-        private readonly Dictionary<RemoteUser, DateTime> _activeConnections = new Dictionary<RemoteUser, DateTime>();
+        private readonly List<RemoteUser>_activeConnections = new List<RemoteUser>();
         
         private static readonly TimeSpan TimerInterval = TimeSpan.FromSeconds(3);
-        private static readonly TimeSpan ConnectionTimeout = TimeSpan.FromSeconds(30);
+        private static readonly TimeSpan ConnectionTimeout = TimeSpan.FromSeconds(1000);
 
         public ConnectionsManager(ITransportResource resource, 
             IUsersRepository userRepository,
@@ -43,7 +43,18 @@ namespace VoipTranslator.Server
             get
             {
                 lock (_activeConnections)
-                    return new ReadOnlyCollection<RemoteUser>(_activeConnections.Keys.ToList()); 
+                    return new ReadOnlyCollection<RemoteUser>(_activeConnections); 
+            }
+        }
+
+        public RemoteUser FindRemoteUserByNumber(string number)
+        {
+            lock (_activeConnections)
+            {
+                var connection = _activeConnections.FirstOrDefault(i => i.User.Number == number);
+                if (connection == null)
+                    return null;
+                return connection;
             }
         }
 
@@ -51,11 +62,11 @@ namespace VoipTranslator.Server
         {
             lock (_activeConnections)
             {
-                var timeoutedConnections = _activeConnections.Where(i => (DateTime.Now - i.Value) > ConnectionTimeout).ToList();
+                var timeoutedConnections = _activeConnections.Where(i => (DateTime.Now - i.Peer.LastActivity) > ConnectionTimeout).ToList();
                 foreach (var timeoutedConnection in timeoutedConnections)
                 {
                     Logger.Trace("Closing connection due to timeout");
-                    _activeConnections.Remove(timeoutedConnection.Key);
+                    _activeConnections.Remove(timeoutedConnection);
                 }
             }
         }
@@ -64,19 +75,30 @@ namespace VoipTranslator.Server
         {
             try
             {
-                lock (_responseWaiters)
+                lock (_activeConnections)
                 {
                     var command = _serializer.Deserialize(e.Data);
                     var user = _userRepository.GetById(command.UserId);
                     RemoteUser remoteUser;
                     if (user != null)
                     {
-                        remoteUser = new RemoteUser(user, e.Peer);
-                        _activeConnections[remoteUser] = DateTime.Now;
+                        var existedConnection = _activeConnections.FirstOrDefault(i => i.User.Equals(user));
+                        if (existedConnection != null)
+                        {
+                            existedConnection.Peer = e.Peer;
+                            existedConnection.Peer.UpdateLastActivity();
+                            remoteUser = existedConnection;
+                        }
+                        else
+                        {
+                            remoteUser = new RemoteUser(user, e.Peer);
+                        }
+                        _activeConnections.Add(remoteUser);
                     }
                     else
                     {
                         remoteUser = new RemoteUser(new User(), e.Peer);
+                        _activeConnections.Add(remoteUser);
                     }
                     CommandRecieved(this, new RemoteUserCommandEventArgs { Command = command, RemoteUser = remoteUser });
                 }
