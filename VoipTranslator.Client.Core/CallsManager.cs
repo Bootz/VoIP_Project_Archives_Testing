@@ -8,25 +8,22 @@ namespace VoipTranslator.Client.Core
 {
     public class CallsManager
     {
-        private readonly AccountManager _accountManager;
         private readonly CommandBuilder _commandBuilder;
         private readonly IAudioDeviceResource _audioDevice;
         private readonly TransportManager _transportManager;
 
-        public CallsManager(AccountManager accountManager,
-            CommandBuilder commandBuilder,
+        public CallsManager(CommandBuilder commandBuilder,
             IAudioDeviceResource audioDevice,
             TransportManager transportManager)
         {
-            _accountManager = accountManager;
             _commandBuilder = commandBuilder;
             _audioDevice = audioDevice;
             _transportManager = transportManager;
             _transportManager.CommandRecieved += _transportManager_OnCommandRecieved;
-            _audioDevice.DataPacketCaptured += _audioDevice_DataPacketCaptured;
+            _audioDevice.DataPacketCaptured += _audioDevice_OnDataPacketCaptured;
         }
 
-        private void _audioDevice_DataPacketCaptured(object sender, BinaryDataEventsArgs e)
+        private void _audioDevice_OnDataPacketCaptured(object sender, BinaryDataEventsArgs e)
         {
             if (!IsInCall)
                 return;
@@ -79,16 +76,24 @@ namespace VoipTranslator.Client.Core
 
         public Task Answer()
         {
+            IsInCall = true;
+            _audioDevice.StartCapture();
+
             return null;
         }
 
         public Task Decline()
         {
+            IsInCall = false;
+
             return null;
         }
 
         public Task End()
         {
+            IsInCall = false;
+            _audioDevice.StopCapture();
+
             return null;
         }
     }
