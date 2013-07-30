@@ -5,7 +5,8 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:resources="clr-namespace:VoipTranslator.Client.WinPhone.Resources"
-    xmlns:services="clr-namespace:VoipTranslator.Client.WinPhone.Services">
+    xmlns:services="clr-namespace:VoipTranslator.Client.WinPhone.Services"
+    xmlns:views="clr-namespace:VoipTranslator.Client.WinPhone.Views">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -27,6 +28,9 @@
                                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                             VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+
+                                    <views:CallControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+                                    
                                     <Grid Background="#74000000" Visibility="{Binding IsBusy, Source={StaticResource FrameViewModel}, Converter={StaticResource TrueToVisibleConverter}}">
                                         <TextBlock Text="Please, wait..." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                                         <ProgressBar VerticalAlignment="Center" HorizontalAlignment="Center" IsIndeterminate="True" Width="300" Margin="0,40,0,0"/>

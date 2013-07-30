@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="VoipTranslator.Client.WinPhone.Views.CallControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:behaviours="clr-namespace:CyclopsToolkit.WinPhone.Behaviours;assembly=CyclopsToolkit.WinPhone"
+             mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="800" d:DesignWidth="480">
+
+    <Grid x:Name="LayoutRoot" Background="Black" Visibility="Collapsed" DataContext="{StaticResource CallViewModel}">
+    	<VisualStateManager.VisualStateGroups>
+    		<VisualStateGroup x:Name="VisualStateGroup">
+    			<VisualStateGroup.Transitions>
+    				<VisualTransition GeneratedDuration="0:0:0.2" To="Ringing">
+    					<Storyboard>
+    						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="LayoutRoot">
+    							<DiscreteObjectKeyFrame KeyTime="0">
+    								<DiscreteObjectKeyFrame.Value>
+    									<Visibility>Visible</Visibility>
+    								</DiscreteObjectKeyFrame.Value>
+    							</DiscreteObjectKeyFrame>
+    						</ObjectAnimationUsingKeyFrames>
+    					</Storyboard>
+    				</VisualTransition>
+    				<VisualTransition GeneratedDuration="0:0:0.5"/>
+    				<VisualTransition From="Ringing" GeneratedDuration="0:0:0.2" To="None">
+    					<Storyboard>
+    						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="LayoutRoot">
+    							<DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+    								<DiscreteObjectKeyFrame.Value>
+    									<Visibility>Collapsed</Visibility>
+    								</DiscreteObjectKeyFrame.Value>
+    							</DiscreteObjectKeyFrame>
+    						</ObjectAnimationUsingKeyFrames>
+    					</Storyboard>
+    				</VisualTransition>
+    			</VisualStateGroup.Transitions>
+    			<VisualState x:Name="Ringing">
+    				<Storyboard>
+    					<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="LayoutRoot" d:IsOptimized="True"/>
+    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="LayoutRoot">
+    						<DiscreteObjectKeyFrame KeyTime="0">
+    							<DiscreteObjectKeyFrame.Value>
+    								<Visibility>Visible</Visibility>
+    							</DiscreteObjectKeyFrame.Value>
+    						</DiscreteObjectKeyFrame>
+    					</ObjectAnimationUsingKeyFrames>
+    				</Storyboard>
+    			</VisualState>
+    			<VisualState x:Name="InCall">
+    				<Storyboard>
+    					<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="LayoutRoot" d:IsOptimized="True"/>
+    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="AnswerButton">
+    						<DiscreteObjectKeyFrame KeyTime="0">
+    							<DiscreteObjectKeyFrame.Value>
+    								<Visibility>Collapsed</Visibility>
+    							</DiscreteObjectKeyFrame.Value>
+    						</DiscreteObjectKeyFrame>
+    					</ObjectAnimationUsingKeyFrames>
+    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="DeclineButton">
+    						<DiscreteObjectKeyFrame KeyTime="0">
+    							<DiscreteObjectKeyFrame.Value>
+    								<Visibility>Collapsed</Visibility>
+    							</DiscreteObjectKeyFrame.Value>
+    						</DiscreteObjectKeyFrame>
+    					</ObjectAnimationUsingKeyFrames>
+    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="EndCallButton">
+    						<DiscreteObjectKeyFrame KeyTime="0">
+    							<DiscreteObjectKeyFrame.Value>
+    								<Visibility>Visible</Visibility>
+    							</DiscreteObjectKeyFrame.Value>
+    						</DiscreteObjectKeyFrame>
+    					</ObjectAnimationUsingKeyFrames>
+    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="LayoutRoot">
+    						<DiscreteObjectKeyFrame KeyTime="0">
+    							<DiscreteObjectKeyFrame.Value>
+    								<Visibility>Visible</Visibility>
+    							</DiscreteObjectKeyFrame.Value>
+    						</DiscreteObjectKeyFrame>
+    					</ObjectAnimationUsingKeyFrames>
+    				</Storyboard>
+    			</VisualState>
+    			<VisualState x:Name="None"/>
+    		</VisualStateGroup>
+    	</VisualStateManager.VisualStateGroups>
+
+        <i:Interaction.Behaviors>
+            <behaviours:EnumToVisualStateBehavior EnumObject="{Binding State, Source={StaticResource CallViewModel}}" />
+        </i:Interaction.Behaviors>
+        <Grid.Projection>
+    		<PlaneProjection RotationX="90"/>
+    	</Grid.Projection>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Image Margin="0,30,0,0" Source="/Assets/DefaultContactImage.jpg"/>
+        <TextBlock Text="{Binding Number}" FontSize="32" Grid.Row="1" TextAlignment="Center" HorizontalAlignment="Center"/>
+        <StackPanel Margin="0,200,0,0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="AnswerButton" Command="{Binding AnswerCallCommand}" Margin="-4,5" Background="Green" Width="240" Height="90" Content="answer" Visibility="Visible" BorderThickness="0"/>
+            <Button x:Name="DeclineButton" Command="{Binding DeclineCallCommand}" Margin="-4,5" Background="Red" Width="240" Height="90" Content="decline" Visibility="Visible" BorderThickness="0"/>
+            <Button x:Name="EndCallButton" Command="{Binding EndCallCommand}" Margin="-4,5" Background="Red" Width="240" Height="90" Content="end" Visibility="Collapsed" BorderThickness="0"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

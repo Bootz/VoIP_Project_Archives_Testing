@@ -103,12 +103,14 @@
     <Compile Include="Infrastructure\TransportResource.cs" />
     <Compile Include="Navigation\VoipTranslatorNavigator.cs" />
     <Compile Include="Resources\LocalizedStrings.cs" />
+    <Compile Include="ViewModels\CallViewModel.cs" />
     <Compile Include="ViewModels\FrameViewModel.cs" />
+    <Compile Include="ViewModels\KeypadViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBaseEx.cs" />
-    <Compile Include="Views\IncomingCallControl.xaml.cs">
-      <DependentUpon>IncomingCallControl.xaml</DependentUpon>
+    <Compile Include="Views\CallControl.xaml.cs">
+      <DependentUpon>CallControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -132,7 +134,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="Views\IncomingCallControl.xaml">
+    <Page Include="Views\CallControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -32,7 +32,7 @@
         </Grid.RowDefinitions>
         <Grid x:Name="ContentPanel">
             <phone:Pivot Title="VoIP translator">
-                <phone:PivotItem Header="dialer">
+                <phone:PivotItem Header="dialer" DataContext="{StaticResource KeypadViewModel}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -88,7 +88,7 @@
                     </Grid>
                 </phone:PivotItem>
                 <phone:PivotItem Header="contacts">
-
+                    <TextBlock Margin="12,-12,0,0" Foreground="Gray" Text="contacts aren't implemented yet."/>
                 </phone:PivotItem>
             </phone:Pivot>
         </Grid>

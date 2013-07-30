@@ -81,5 +81,15 @@ namespace VoipTranslator.Client.Core
         {
             return null;
         }
+
+        public Task Decline()
+        {
+            return null;
+        }
+
+        public Task End()
+        {
+            return null;
+        }
     }
 }

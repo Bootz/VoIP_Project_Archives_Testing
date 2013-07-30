@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading;
+using System.Threading.Tasks;
 using Windows.Networking;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
@@ -15,27 +16,19 @@ namespace VoipTranslator.Client.WinPhone.Infrastructure
         private readonly DatagramSocket _socket = new DatagramSocket();
         private DataWriter _dataWriter = new DataWriter();
         private static readonly SemaphoreSlim SemaphoreSlim = new SemaphoreSlim(1);
+        private bool _isServiceBound = false;
 
         public TransportResource()
         {
             _socket.MessageReceived += _socket_OnMessageReceived;
-            BindService();
         }
 
-        private async void BindService()
+        private async Task BindService()
         {
-            try
-            {
-                await SemaphoreSlim.WaitAsync();
-                var stream = await _socket.GetOutputStreamAsync(
-                    new HostName(ServerAddress.HostName), 
-                    ServerAddress.Port.ToString(CultureInfo.InvariantCulture));
-                _dataWriter = new DataWriter(stream);
-            }
-            finally
-            {
-                SemaphoreSlim.Release();
-            }
+            var stream = await _socket.GetOutputStreamAsync(
+                new HostName(ServerAddress.HostName),
+                ServerAddress.Port.ToString(CultureInfo.InvariantCulture));
+            _dataWriter = new DataWriter(stream);
         }
 
         private void _socket_OnMessageReceived(DatagramSocket sender, DatagramSocketMessageReceivedEventArgs e)
@@ -49,6 +42,11 @@ namespace VoipTranslator.Client.WinPhone.Infrastructure
         {
             try
             {
+                if (!_isServiceBound)
+                {
+                    _isServiceBound = true;
+                    await BindService();
+                }
                 await SemaphoreSlim.WaitAsync();
                 _dataWriter.WriteString(data);
                 await _dataWriter.StoreAsync();

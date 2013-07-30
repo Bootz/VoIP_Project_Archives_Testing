@@ -31,6 +31,8 @@ namespace VoipTranslator.Client.WinPhone
                 .RegisterViewModel<RegistrationViewModel>().ForView<RegistrationPage>()
                 .RegisterViewModel<MainViewModel>().Singleton().ForView<MainPage>()
                 .RegisterViewModel<FrameViewModel>().StaticResource().WithoutView()
+                .RegisterViewModel<KeypadViewModel>().StaticResource().WithoutView()
+                .RegisterViewModel<CallViewModel>().StaticResource().WithoutView()
                 ;
 
             base.OnMap(builder);
