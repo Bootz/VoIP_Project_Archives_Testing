@@ -36,7 +36,7 @@ namespace Voip.Server.ConsoleHost
             container.Resolve<VoiceManager>();
 
             container.Resolve<CommandBuilder>().Create(CommandName.Dial, 3);
-            var cmd = container.Resolve<ICommandSerializer>().Serialize(new VoipTranslator.Protocol.Command { Body = "ddd "});
+            var cmd = container.Resolve<ICommandSerializer>().Serialize(new Command { Body = "ddd "});
             var c = container.Resolve<ICommandSerializer>().Deserialize(cmd);
         }
     }
