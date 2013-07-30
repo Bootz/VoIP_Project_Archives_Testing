@@ -5,7 +5,7 @@
         public string UserId { get; set; }
 
         public string Number { get; set; }
-        
+
         public override int GetHashCode()
         {
             return (UserId ?? "").GetHashCode() ^ (Number ?? "").GetHashCode();

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VoipTranslator.Protocol;
+﻿using VoipTranslator.Protocol;
 using VoipTranslator.Protocol.Dto;
 using VoipTranslator.Server.Entities;
 using VoipTranslator.Server.Interfaces;
@@ -34,26 +29,57 @@ namespace VoipTranslator.Server
                     HandleDial(e.Command, e.RemoteUser);
                     break;
                 case CommandName.VoicePacket:
-                    e.RemoteUser.Peer.SendCommand(e.Command);
+                    HandleVoicePacket(e.Command, e.RemoteUser);
+                    break;
+                case CommandName.EndCall:
+                    HandleEndCall(e.Command, e.RemoteUser);
                     break;
             }
+        }
+
+        private void HandleVoicePacket(Command command, RemoteUser remoteUser)
+        {
+            if (remoteUser.IsInCallWith == null)
+                return;
+
+            remoteUser.IsInCallWith.Peer.SendCommand(command);
+        }
+
+        private void HandleEndCall(Command command, RemoteUser remoteUser)
+        {
+            if (remoteUser.IsInCallWith == null)
+                return;
+
+            var cmd = _commandBuilder.Create(CommandName.EndCall, string.Empty);
+            remoteUser.IsInCallWith.Peer.SendCommand(cmd);
         }
 
         private async void HandleDial(Command command, RemoteUser remoteUser)
         {
             var callerNumber = _commandBuilder.GetUnderlyingObject<string>(command);
-            var peer = _connectionsManager.FindRemoteUserByNumber(callerNumber);
+            var opponent = _connectionsManager.FindRemoteUserByNumber(callerNumber);
 
             var dialResult = new DialResult();
 
-            if (peer == null)
+            if (opponent == null)
             {
                 dialResult.Result = DialResultType.NotFound;
             }
             else
             {
-                await Task.Delay(3000);
-                dialResult.Result = DialResultType.Answered;
+                var incomingCallCommand = _commandBuilder.Create(CommandName.IncomingCall, callerNumber);
+                var resultCommand = await opponent.Peer.SendCommandAndWaitAnswer(incomingCallCommand);
+                var answerType = _commandBuilder.GetUnderlyingObject<AnswerResultType>(resultCommand);
+                if (answerType == AnswerResultType.Answered)
+                {
+                    dialResult.Result = DialResultType.Answered;
+                    opponent.IsInCallWith = remoteUser;
+                    remoteUser.IsInCallWith = opponent;
+                }
+                else
+                {
+                    dialResult.Result = DialResultType.Declined;
+                }
             }
             _commandBuilder.ChangeUnderlyingObject(command, dialResult);
             remoteUser.Peer.SendCommand(command);

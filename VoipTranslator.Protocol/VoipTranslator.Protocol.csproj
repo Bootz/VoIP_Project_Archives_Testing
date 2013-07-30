@@ -40,6 +40,7 @@
     <Compile Include="CommandEventArgs.cs" />
     <Compile Include="CommandName.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="Dto\AnswerResultType.cs" />
     <Compile Include="Dto\DialResult.cs" />
     <Compile Include="Dto\DialResultType.cs" />
     <Compile Include="Dto\PacketEventArgs.cs" />

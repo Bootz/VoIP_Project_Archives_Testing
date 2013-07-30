@@ -11,6 +11,8 @@ namespace VoipTranslator.Server.Interfaces
     {
         Task SendCommand(Command command);
 
+        Task<Command> SendCommandAndWaitAnswer(Command command);
+
         string HostName { get; }
 
         string Port { get; }

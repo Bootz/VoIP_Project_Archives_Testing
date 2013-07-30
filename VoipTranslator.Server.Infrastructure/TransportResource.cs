@@ -38,7 +38,7 @@ namespace VoipTranslator.Server.Infrastructure
             Received(this, new PeerCommandEventArgs
                                {
                                    Data = message,
-                                   Peer = new RemotePeer(_serializer, outputStream, e.RemoteAddress, e.RemotePort),
+                                   Peer = new RemotePeer(_serializer, this, outputStream, e.RemoteAddress, e.RemotePort),
                                });
         }
 

@@ -6,6 +6,7 @@ namespace VoipTranslator.Server.Entities
     {
         public User User { get; set; }
         public IRemotePeer Peer { get; set; }
+        public RemoteUser IsInCallWith { get; set; }
 
         public RemoteUser(User user, IRemotePeer peer)
         {

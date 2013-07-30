@@ -11,6 +11,7 @@ namespace VoipTranslator.Client.Core
         private readonly CommandBuilder _commandBuilder;
         private readonly IAudioDeviceResource _audioDevice;
         private readonly TransportManager _transportManager;
+        private Command _incomingCallCommand = null;
 
         public CallsManager(CommandBuilder commandBuilder,
             IAudioDeviceResource audioDevice,
@@ -44,11 +45,12 @@ namespace VoipTranslator.Client.Core
                     }
                     break;
                 case CommandName.EndCall:
-                    _audioDevice.StopCapture();
                     IsInCall = false;
+                    _audioDevice.StopCapture();
                     CallEnded(this, EventArgs.Empty);
                     break;
                 case CommandName.IncomingCall:
+                    _incomingCallCommand = e.Command;
                     IncomingCall(this, new CallEventsArgs { Number = _commandBuilder.GetUnderlyingObject<string>(e.Command)});
                     break;
             }
@@ -77,27 +79,27 @@ namespace VoipTranslator.Client.Core
             return IsInCall;
         }
 
-        public Task Answer()
+        public void Answer()
         {
             IsInCall = true;
             _audioDevice.StartCapture();
-
-            return null;
+            _commandBuilder.ChangeUnderlyingObject(_incomingCallCommand, AnswerResultType.Answered);
+            _transportManager.SendCommand(_incomingCallCommand);
         }
 
-        public Task Decline()
+        public void Decline()
         {
             IsInCall = false;
-
-            return null;
+            _commandBuilder.ChangeUnderlyingObject(_incomingCallCommand, AnswerResultType.Declined);
+            _transportManager.SendCommand(_incomingCallCommand);
         }
 
-        public Task End()
+        public void End()
         {
             IsInCall = false;
             _audioDevice.StopCapture();
-
-            return null;
+            var command = _commandBuilder.Create(CommandName.EndCall, string.Empty);
+            _transportManager.SendCommand(command);
         }
     }
 }
