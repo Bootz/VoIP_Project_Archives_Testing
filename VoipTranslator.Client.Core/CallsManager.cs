@@ -37,8 +37,11 @@ namespace VoipTranslator.Client.Core
             switch (e.Command.Name)
             {
                 case CommandName.VoicePacket:
-                    var data = _commandBuilder.GetUnderlyingObject<byte[]>(e.Command);
-                    _audioDevice.Play(data);
+                    if (IsInCall)
+                    {
+                        var data = _commandBuilder.GetUnderlyingObject<byte[]>(e.Command);
+                        _audioDevice.Play(data);
+                    }
                     break;
                 case CommandName.EndCall:
                     _audioDevice.StopCapture();
