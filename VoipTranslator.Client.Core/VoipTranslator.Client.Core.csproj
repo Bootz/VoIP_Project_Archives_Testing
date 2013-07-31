@@ -36,7 +36,6 @@
     <Compile Include="AccountManager.cs" />
     <Compile Include="ApplicationManager.cs" />
     <Compile Include="CallsManager.cs" />
-    <Compile Include="Common\EnumerableExtensions.cs" />
     <Compile Include="Common\IKeyValueStorage.cs" />
     <Compile Include="Common\ServiceLocator.cs" />
     <Compile Include="Common\StringExtensions.cs" />
@@ -44,6 +43,7 @@
     <Compile Include="Contracts\BinaryDataEventsArgs.cs" />
     <Compile Include="Contracts\CallEventsArgs.cs" />
     <Compile Include="Contracts\IAudioDeviceResource.cs" />
+    <Compile Include="Contracts\IDeviceInfoProvider.cs" />
     <Compile Include="Contracts\ITransportResource.cs" />
     <Compile Include="Contracts\IUIDispatcher.cs" />
     <Compile Include="CoreModule.cs" />

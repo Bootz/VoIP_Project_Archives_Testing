@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace VoipTranslator.Client.Core.Common
+namespace VoipTranslator.Protocol
 {
     public static class EnumerableExtensions
     {
@@ -96,6 +96,15 @@ namespace VoipTranslator.Client.Core.Common
         public static string ToParamsString<K, V>(this IEnumerable<KeyValuePair<K, V>> source, string separator)
         {
             return source.Aggregate("", (acc, kvp) => kvp.Key + "=" + kvp.Value + separator);
+        }
+
+        public static string ToStringIfNotNull(this object obj)
+        {
+            if (obj == null)
+            {
+                return "";
+            }
+            return obj.ToString();
         }
     }
 }

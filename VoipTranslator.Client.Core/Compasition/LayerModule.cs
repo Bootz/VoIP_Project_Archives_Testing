@@ -2,6 +2,7 @@
 using System.Linq;
 using Autofac;
 using VoipTranslator.Client.Core.Common;
+using VoipTranslator.Protocol;
 
 namespace VoipTranslator.Client.Core.Compasition
 {

@@ -96,6 +96,7 @@
     <Compile Include="ApplicationModule.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Infrastructure\AudioDeviceResource.cs" />
+    <Compile Include="Infrastructure\DeviceInfoProvider.cs" />
     <Compile Include="Infrastructure\Dispatcher.cs" />
     <Compile Include="Infrastructure\ContainerBuilderAdapter.cs" />
     <Compile Include="Infrastructure\KeyValueStorage.cs" />

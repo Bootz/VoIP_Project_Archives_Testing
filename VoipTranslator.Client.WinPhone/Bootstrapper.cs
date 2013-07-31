@@ -2,6 +2,7 @@
 using VoipTranslator.Client.Core;
 using VoipTranslator.Client.Core.Common;
 using VoipTranslator.Client.Core.Compasition;
+using VoipTranslator.Protocol;
 
 namespace VoipTranslator.Client.WinPhone
 {

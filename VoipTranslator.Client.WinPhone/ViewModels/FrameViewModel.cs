@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 
 namespace VoipTranslator.Client.WinPhone.ViewModels
@@ -11,13 +12,12 @@ namespace VoipTranslator.Client.WinPhone.ViewModels
         {
         }
 
+        public Dispatcher Dispatcher { get { return Deployment.Current.Dispatcher; } }
+
         public bool IsBusy
         {
             get { return _isBusy; }
-            set
-            {
-                Deployment.Current.Dispatcher.BeginInvoke(() => Set("IsBusy", ref _isBusy, value));
-            }
+            set { Dispatcher.BeginInvoke(() => Set("IsBusy", ref _isBusy, value)); }
         }
     }
 }
