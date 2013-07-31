@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using CyclopsToolkit.WinPhone.Navigation;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -39,6 +41,8 @@ namespace VoipTranslator.Client.WinPhone.ViewModels
         {
             get { return _show ?? (_show = new RelayCommand(Show)); }
         }
+
+        public Dispatcher Dispatcher { get { return Deployment.Current.Dispatcher; } }
 
         public virtual void Show()
         {

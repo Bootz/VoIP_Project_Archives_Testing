@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using VoipTranslator.Client.Core;
 
@@ -14,16 +13,16 @@ namespace VoipTranslator.Client.WinPhone.ViewModels
         public CallViewModel(CallsManager callsManager)
         {
             _callsManager = callsManager;
-            _callsManager.CallEnded +=(s,e) _callsManager_OnCallEnded;
-            _callsManager.IncomingCall += _callsManager_OnIncomingCall;
+            _callsManager.CallEnded += (s,e) => Dispatcher.BeginInvoke(_callsManager_OnCallEnded);
+            _callsManager.IncomingCall += (s, e) => Dispatcher.BeginInvoke(_callsManager_OnIncomingCall);
         }
 
-        private void _callsManager_OnIncomingCall(object sender, EventArgs e)
+        private void _callsManager_OnIncomingCall()
         {
             State = CallState.Ringing;
         }
 
-        private void _callsManager_OnCallEnded(object sender, EventArgs e)
+        private void _callsManager_OnCallEnded()
         {
             State = CallState.None;
         }
