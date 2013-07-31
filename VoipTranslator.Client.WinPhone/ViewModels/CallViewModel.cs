@@ -14,7 +14,7 @@ namespace VoipTranslator.Client.WinPhone.ViewModels
         public CallViewModel(CallsManager callsManager)
         {
             _callsManager = callsManager;
-            _callsManager.CallEnded += _callsManager_OnCallEnded;
+            _callsManager.CallEnded +=(s,e) _callsManager_OnCallEnded;
             _callsManager.IncomingCall += _callsManager_OnIncomingCall;
         }
 

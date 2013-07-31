@@ -5,12 +5,12 @@ namespace CyclopsToolkit.WinPhone.Navigation
 {
     public static class ViewModelsRegistry
     {
-        private static readonly Dictionary<Guid, WeakReference> ViewModels = new Dictionary<Guid, WeakReference>();
+        private static readonly Dictionary<Guid, object> ViewModels = new Dictionary<Guid, object>();
 
         public static string Register(object viewModel)
         {
             var id = Guid.NewGuid();
-            ViewModels[id] = new WeakReference(viewModel);
+            ViewModels[id] = viewModel;
             return id.ToString();
         }
 
@@ -24,10 +24,10 @@ namespace CyclopsToolkit.WinPhone.Navigation
                 //TODO: log
                 return null;
             }
-            WeakReference weakRef;
-            if (ViewModels.TryGetValue(vmId, out weakRef) && weakRef.IsAlive)
+            object weakRef;
+            if (ViewModels.TryGetValue(vmId, out weakRef) /*&& weakRef.IsAlive*/)
             {
-                return weakRef.Target;
+                return weakRef;
             }
             //TODO: log
             return null;

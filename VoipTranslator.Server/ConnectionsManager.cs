@@ -51,7 +51,7 @@ namespace VoipTranslator.Server
         {
             lock (_activeConnections)
             {
-                var connection = _activeConnections.FirstOrDefault(i => i.User.Number == number);
+                var connection = _activeConnections.LastOrDefault(i => i.User.Number == number);
                 if (connection == null)
                     return null;
                 return connection;

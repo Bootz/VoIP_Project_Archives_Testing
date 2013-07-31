@@ -88,9 +88,6 @@
     		</VisualStateGroup>
     	</VisualStateManager.VisualStateGroups>
 
-        <i:Interaction.Behaviors>
-            <behaviours:EnumToVisualStateBehavior EnumObject="{Binding State, Source={StaticResource CallViewModel}}" />
-        </i:Interaction.Behaviors>
         <Grid.Projection>
     		<PlaneProjection RotationX="90"/>
     	</Grid.Projection>
@@ -111,4 +108,7 @@
             <Button x:Name="EndCallButton" Command="{Binding EndCallCommand}" Margin="-4,5" Background="Red" Width="240" Height="90" Content="end" Visibility="Collapsed" BorderThickness="0"/>
         </StackPanel>
     </Grid>
+    <i:Interaction.Behaviors>
+        <behaviours:EnumToVisualStateBehavior EnumObject="{Binding State, Source={StaticResource CallViewModel}}" />
+    </i:Interaction.Behaviors>
 </UserControl>

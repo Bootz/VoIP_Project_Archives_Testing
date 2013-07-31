@@ -18,7 +18,6 @@ namespace VoipTranslator.Client.WinPhone.ViewModels
             _appManager = appManager;
             _callViewModel = callViewModel;
             _callsManager = callsManager;
-            _appManager.StartApp();
         }
 
         public string Number

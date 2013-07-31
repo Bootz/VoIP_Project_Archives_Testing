@@ -13,7 +13,12 @@ namespace VoipTranslator.Client.WinPhone.ViewModels
         {
             _appManager = appManager;
             _callsManager = callsManager;
+        }
+
+        public override void OnNavigatedTo()
+        {
             _appManager.StartApp();
+            base.OnNavigatedTo();
         }
     }
 }
