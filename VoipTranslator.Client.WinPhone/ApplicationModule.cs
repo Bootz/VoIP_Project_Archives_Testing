@@ -20,12 +20,14 @@ namespace VoipTranslator.Client.WinPhone
             _navigationBuilder = new NavigationBuilder(new ContainerBuilderAdapter(builder));
             builder.RegisterInstance(_navigationBuilder).SingleInstance();
 
+            builder.RegisterType<AgentsController>().SingleInstance();
             builder.RegisterType<VoipTranslatorNavigator>().As<NavigationManagerBase>().SingleInstance();
             builder.RegisterType<KeyValueStorage>().As<IKeyValueStorage>().SingleInstance();
             builder.RegisterType<Dispatcher>().As<IUIDispatcher>().SingleInstance();
             builder.RegisterType<TransportResource>().As<ITransportResource>().SingleInstance();
             builder.RegisterType<PhoneLogger>().As<ILogger>().SingleInstance();
             builder.RegisterType<AudioDeviceResource>().As<IAudioDeviceResource>().SingleInstance();
+            builder.RegisterType<DeviceInfoProvider>().As<IDeviceInfoProvider>().SingleInstance();
 
             _navigationBuilder
                 .RegisterViewModel<RegistrationViewModel>().ForView<RegistrationPage>()

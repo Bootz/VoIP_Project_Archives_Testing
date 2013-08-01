@@ -9,6 +9,7 @@ namespace VoipTranslator.Client.WinPhone.Infrastructure
         private Microphone _microphone = null;
         private byte[] _baBuffer = null;
         private SoundEffect _soundEffect = null;
+        private static readonly object SyncObj = new object();
 
         public void StartCapture()
         {
@@ -56,7 +57,7 @@ namespace VoipTranslator.Client.WinPhone.Infrastructure
         //TODO: play on gsm output device
         public void Play(byte[] packetData)
         {
-            lock (_microphone)
+            lock (SyncObj)
             {
                 _soundEffect = new SoundEffect(packetData, _microphone.SampleRate, AudioChannels.Mono);
                 _soundEffect.Play();

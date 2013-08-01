@@ -10,14 +10,17 @@ namespace VoipTranslator.Server
         private readonly CommandBuilder _commandBuilder;
         private readonly ConnectionsManager _connectionsManager;
         private readonly IUsersRepository _usersRepository;
+        private readonly IPushSender _pushSender;
 
         public VoiceManager(ConnectionsManager connectionsManager, 
             IUsersRepository usersRepository,
+            IPushSender pushSender,
             CommandBuilder commandBuilder)
         {
             _commandBuilder = commandBuilder;
             _connectionsManager = connectionsManager;
             _usersRepository = usersRepository;
+            _pushSender = pushSender;
             _connectionsManager.CommandRecieved += _connectionsManager_OnCommandRecieved;
         }
 
@@ -63,7 +66,27 @@ namespace VoipTranslator.Server
 
             if (opponent == null)
             {
-                dialResult.Result = DialResultType.NotFound;
+                var opponentUser = _usersRepository.GetByNumber(callerNumber);
+                if (opponentUser != null)
+                {
+                    _pushSender.SendVoipPush(opponentUser.PushUri, remoteUser.User.Number, remoteUser.User.Number);
+                    var resultCommand = await _connectionsManager.PostWaiter(opponentUser.UserId, CommandName.IncomingCall);
+                    var answerType = _commandBuilder.GetUnderlyingObject<AnswerResultType>(resultCommand);
+                    if (answerType == AnswerResultType.Answered)
+                    {
+                        dialResult.Result = DialResultType.Answered;
+                        opponent.IsInCallWith = remoteUser;
+                        remoteUser.IsInCallWith = opponent;
+                    }
+                    else
+                    {
+                        dialResult.Result = DialResultType.Declined;
+                    }
+                }
+                else
+                {
+                    dialResult.Result = DialResultType.NotFound;
+                }
             }
             else
             {

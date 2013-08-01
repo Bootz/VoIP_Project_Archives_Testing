@@ -59,5 +59,11 @@ namespace VoipTranslator.Client.Core
             }
             return false;
         }
+
+        public void Deregister()
+        {
+            Number = string.Empty;
+            UserId = string.Empty;
+        }
     }
 }

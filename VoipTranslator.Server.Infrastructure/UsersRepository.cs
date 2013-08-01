@@ -33,5 +33,22 @@ namespace VoipTranslator.Server.Infrastructure
                 return _users.FirstOrDefault(i => i.UserId == userId);
             }
         }
+
+        //NOTE: in test purposes
+        public User GetLastUser()
+        {
+            lock (_users)
+            {
+                return _users.LastOrDefault(i => !string.IsNullOrEmpty(i.UserId) && !string.IsNullOrEmpty(i.Number));
+            }
+        }
+
+        public User GetByNumber(string number)
+        {
+            lock (_users)
+            {
+                return _users.FirstOrDefault(i => i.Number == number);
+            }
+        }
     }
 }

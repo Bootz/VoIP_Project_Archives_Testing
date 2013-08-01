@@ -5,20 +5,41 @@ namespace VoipTranslator.Client.WinPhone.ViewModels
     public class MainViewModel : ViewModelBaseEx
     {
         private readonly ApplicationManager _appManager;
-        private readonly CallsManager _callsManager;
-        private string _number;
+        private readonly CallViewModel _callViewModel;
+        private readonly AccountManager _accountManager;
+        private string _number = null;
 
         public MainViewModel(ApplicationManager appManager,
-            CallsManager callsManager)
+            CallViewModel callViewModel,
+            AccountManager accountManager)
         {
             _appManager = appManager;
-            _callsManager = callsManager;
+            _callViewModel = callViewModel;
+            _accountManager = accountManager;
         }
 
         public override void OnNavigatedTo()
         {
-            _appManager.StartApp();
             base.OnNavigatedTo();
+        }
+
+        public override async void Show()
+        {
+            IsBusy = true;
+            await _appManager.StartApp();
+            if (_number != null && _accountManager.IsRegistered)
+            {
+                _callViewModel.AnswerCall();
+                _number = null;
+            }
+            IsBusy = false;
+            base.Show();
+        }
+
+        public void ShowAndCall(string number)
+        {
+            _number = number;
+            Show();
         }
     }
 }

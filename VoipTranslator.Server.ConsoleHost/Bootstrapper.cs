@@ -34,11 +34,6 @@ namespace Voip.Server.ConsoleHost
             ServiceLocator.Init(container);
             container.Resolve<AccountService>();
             container.Resolve<VoiceManager>();
-
-            //test
-            container.Resolve<CommandBuilder>().Create(CommandName.Dial, 3);
-            var cmd = container.Resolve<ICommandSerializer>().Serialize(new Command { Body = container.Resolve<IDtoSerializer>().Serialize("ddd")});
-            var c = container.Resolve<ICommandSerializer>().Deserialize(cmd);
         }
     }
 }

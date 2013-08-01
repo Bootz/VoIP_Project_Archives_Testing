@@ -1,44 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Phone.Info;
-using Microsoft.Phone.Notification;
 using VoipTranslator.Client.Core.Contracts;
-using VoipTranslator.Protocol;
 
 namespace VoipTranslator.Client.WinPhone.Infrastructure
 {
     public class DeviceInfoProvider : IDeviceInfoProvider
     {
+        private readonly AgentsController _agentsController;
         private string _savedDeviceName = string.Empty;
-        public const string PushChannelName = "VoipTranslatorChannel";
+
+        public DeviceInfoProvider(AgentsController agentsController)
+        {
+            _agentsController = agentsController;
+        }
 
         public Task<string> GetPushUri()
         {
-            throw new NotImplementedException();
-        }
-
-        private Task<string> InitPushChannel()
-        {
-            var taskSource = new TaskCompletionSource<string>();
-            var pushChannel = HttpNotificationChannel.Find(PushChannelName);
-            if (pushChannel == null)
-            {
-                pushChannel = new HttpNotificationChannel(PushChannelName);
-                pushChannel.Open();
-                pushChannel.BindToShellTile();
-                pushChannel.BindToShellToast();
-            }
-            else
-            {
-                taskSource.TrySetResult(pushChannel.ChannelUri.ToStringIfNotNull());
-            }
-            pushChannel.ChannelUriUpdated += (s, e) => taskSource.TrySetResult(e.ChannelUri.ToStringIfNotNull());
-            pushChannel.ErrorOccurred += (s, e) => taskSource.TrySetResult("");
-            return taskSource.Task;
+            return _agentsController.InitAndGetPushUri();
         }
 
         public async Task<string> GetDeviceName()

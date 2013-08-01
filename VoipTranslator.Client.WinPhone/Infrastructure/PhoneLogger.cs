@@ -5,6 +5,8 @@ namespace VoipTranslator.Client.WinPhone.Infrastructure
 {
     public class PhoneLogger : ILogger
     {
+        //TODO: implement
+
         public void Trace(string format, params object[] args)
         {
         }

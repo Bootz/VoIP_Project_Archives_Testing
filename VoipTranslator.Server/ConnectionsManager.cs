@@ -16,7 +16,9 @@ namespace VoipTranslator.Server
     {
         private static readonly ILogger Logger = LogFactory.GetLogger<ConnectionsManager>();
         private readonly ICommandSerializer _serializer;
-        private readonly Dictionary<long, TaskCompletionSource<Command>> _responseWaiters = new Dictionary<long, TaskCompletionSource<Command>>();
+
+        private readonly Dictionary<Tuple<string, CommandName>, TaskCompletionSource<Command>> _responceWaiters =
+            new Dictionary<Tuple<string, CommandName>, TaskCompletionSource<Command>>(); 
         private readonly ITransportResource _resource;
         private readonly IUsersRepository _userRepository;
         private Timer _timer;
@@ -78,6 +80,19 @@ namespace VoipTranslator.Server
                 lock (_activeConnections)
                 {
                     var command = _serializer.Deserialize(e.Data);
+                    if (!string.IsNullOrEmpty(command.UserId))
+                    {
+                        lock (_responceWaiters)
+                        {
+                            TaskCompletionSource<Command> taskSource;
+                            if (_responceWaiters.TryGetValue(new Tuple<string, CommandName>(command.UserId, command.Name),
+                                out taskSource))
+                            {
+                                taskSource.TrySetResult(command);
+                            }
+                        }
+                    }
+
                     var user = _userRepository.GetById(command.UserId);
                     RemoteUser remoteUser;
                     if (user != null)
@@ -106,6 +121,16 @@ namespace VoipTranslator.Server
             catch (Exception exc)
             {
                 Logger.Exception(exc, "_resource_OnReceived");
+            }
+        }
+
+        public Task<Command> PostWaiter(string userId, CommandName cmdName)
+        {
+            lock (_responceWaiters)
+            {
+                var taskSource = new TaskCompletionSource<Command>();
+                _responceWaiters[new Tuple<string, CommandName>(userId, cmdName)] = taskSource;
+                return taskSource.Task;
             }
         }
     }

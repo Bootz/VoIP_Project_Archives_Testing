@@ -65,9 +65,18 @@ namespace VoipTranslator.Server
             var request = _commandBuilder.GetUnderlyingObject<AuthenticationRequest>(command);
             var result = new AuthenticationResult();
 
-            bool exists = _usersRepository.Exists(request.UserId);
-            result.Result = exists ? AuthenticationResultType.Success : AuthenticationResultType.NotRegistered;
-
+            var user = _usersRepository.GetById(request.UserId);
+            if (user != null)
+            {
+                result.Result = AuthenticationResultType.Success;
+                user.OsName = request.OsName;
+                user.PushUri = request.PushUri;
+                user.DeviceName = request.DeviceName;
+            }
+            else
+            {
+                result.Result = AuthenticationResultType.NotRegistered;
+            }
             _commandBuilder.ChangeUnderlyingObject(command, result);
             await remoteUser.Peer.SendCommand(command);
         }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{055d4933-bc88-49d3-bfce-3afd19535d7a}" Title="VoipTranslator.Client.WinPhone" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="VoipTranslator.Client.WinPhone author" Description="Sample description" Publisher="VoipTranslator.Client.WinPhone" PublisherID="{4fe8d1cd-de14-4405-a790-ce4b3468cdf6}">
+  <App xmlns="" ProductID="{055d4933-bc88-49d3-bfce-3afd19535d78}" Title="Voip" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="EgorBo" Description="Voip cleint" Publisher="Egor Bogatov" PublisherID="{4fe8d1cd-de14-4405-a790-ce4b3468cdf6}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -20,6 +20,11 @@
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" NavigationPage="Views/SplashScreenPage.xaml" />
+      <ExtendedTask Name="BackgroundTask">
+        <BackgroundServiceAgent Specifier="ScheduledTaskAgent" Name="IncomingAndKeepAliveAgent" Source="VoipTranslator.Client.WinPhone.Agents" Type="VoipTranslator.Client.WinPhone.Agents.ScheduledAgentImpl" />
+        <BackgroundServiceAgent Specifier="VoIPCallInProgressAgent" Name="CallInProgressAgent" Source="VoipTranslator.Client.WinPhone.Agents" Type="VoipTranslator.Client.WinPhone.Agents.CallInProgressAgentImpl" />
+        <BackgroundServiceAgent Specifier="VoIPForegroundLifetimeAgent" Name="ForegroundLifetimeAgent" Source="VoipTranslator.Client.WinPhone.Agents" Type="VoipTranslator.Client.WinPhone.Agents.ForegroundLifetimeAgentImpl" />
+      </ExtendedTask>
     </Tasks>
     <Tokens>
       <PrimaryToken TokenID="VoipTranslator.Client.WinPhoneToken" TaskName="_default">
@@ -27,7 +32,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>VoipTranslator.Client.WinPhone</Title>
+          <Title>Voip</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>

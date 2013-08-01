@@ -9,9 +9,9 @@ using System.Resources;
 [assembly: AssemblyTitle("CyclopsToolkit.WinPhone")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("EgorBo")]
 [assembly: AssemblyProduct("CyclopsToolkit.WinPhone")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyCopyright("Copyright © EgorBo 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

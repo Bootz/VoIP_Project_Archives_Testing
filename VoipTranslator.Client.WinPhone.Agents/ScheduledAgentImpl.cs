@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Microsoft.Phone.Networking.Voip;
 using Microsoft.Phone.Scheduler;
-using VoipTranslator.Protocol;
 using Windows.ApplicationModel;
 using Windows.Phone.Networking.Voip;
 using VoipTranslator.Protocol.Dto;
@@ -29,12 +28,12 @@ namespace VoipTranslator.Client.WinPhone.Agents
                     pushNotification = (IncomingCallInfoDto)xs.Deserialize(ms);
                 }
 
-                String defaultContactImageUri = Package.Current.InstalledLocation.Path + @"\Assets\DefaultContactImage.png";
-                String logoUrl = Package.Current.InstalledLocation.Path + @"\Assets\header_logo.png";
+                String defaultContactImageUri = Package.Current.InstalledLocation.Path + @"\Assets\DefaultContactImage.jpg";
+                String logoUrl = Package.Current.InstalledLocation.Path + @"\Assets\ApplicationIcon.png";
 
                 VoipPhoneCall callObj;
                 var callCoordinator = VoipCallCoordinator.GetDefault();
-                callCoordinator.RequestNewIncomingCall("/MainPage.xaml?incomingCall=" + pushNotification.Number,
+                callCoordinator.RequestNewIncomingCall("/Views/SplashScreenPage.xaml?incomingCall=" + pushNotification.Number,
                                                        pushNotification.Name, pushNotification.Number, new Uri(defaultContactImageUri),
                                                        "VoipTranslator.Client.WinPhone", new Uri(defaultContactImageUri), "VoIP Translator", new Uri(logoUrl), VoipCallMedia.Audio,
                                                        TimeSpan.FromMinutes(5), out callObj);

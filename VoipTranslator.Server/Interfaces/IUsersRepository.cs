@@ -7,5 +7,7 @@ namespace VoipTranslator.Server.Interfaces
         void Add(User user);
         bool Exists(string userId);
         User GetById(string userId);
+        User GetLastUser();
+        User GetByNumber(string number);
     }
 }

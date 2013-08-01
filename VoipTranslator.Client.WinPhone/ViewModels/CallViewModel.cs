@@ -80,7 +80,7 @@ namespace VoipTranslator.Client.WinPhone.ViewModels
             _callsManager.Decline();
         }
 
-        private void AnswerCall()
+        public void AnswerCall()
         {
             State = CallState.InCall;
             _callsManager.Answer();

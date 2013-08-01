@@ -8,10 +8,12 @@ using VoipTranslator.Client.WinPhone.Views;
 
 namespace VoipTranslator.Client.WinPhone.Navigation
 {
-    class VoipTranslatorNavigator : NavigationManagerBase
+    internal class VoipTranslatorNavigator : NavigationManagerBase
     {
         private readonly ApplicationManager _appManager;
         private readonly AccountManager _accountManager;
+
+        public const string IncomingCallArgument = "incomingCall";
 
         public VoipTranslatorNavigator(NavigationBuilder navigationBuilder, 
             ApplicationManager appManager,
@@ -48,7 +50,15 @@ namespace VoipTranslator.Client.WinPhone.Navigation
             }
             else
             {
-                ServiceLocator.Resolve<MainViewModel>().Show();
+                string number;
+                if (navigationContext.QueryString.TryGetValue(IncomingCallArgument, out number) && !string.IsNullOrWhiteSpace(number))
+                {
+                    ServiceLocator.Resolve<MainViewModel>().ShowAndCall(number);
+                }
+                else
+                {
+                    ServiceLocator.Resolve<MainViewModel>().Show();
+                }
             }
         }
     }
