@@ -51,6 +51,7 @@
     <Reference Include="Windows" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmptyUserIdProvider.cs" />
     <Compile Include="ConsoleLogger.cs" />
     <Compile Include="InfrastructureModule.cs" />
     <Compile Include="PushSender.cs" />

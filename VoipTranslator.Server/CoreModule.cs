@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using VoipTranslator.Protocol;
 using VoipTranslator.Protocol.Serializers;
+using VoipTranslator.Protocol.Serializers.Builtin;
 
 namespace VoipTranslator.Server
 {

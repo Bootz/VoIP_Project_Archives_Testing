@@ -2,7 +2,7 @@
 using System.Text;
 using System.Xml.Serialization;
 
-namespace VoipTranslator.Protocol.Serializers
+namespace VoipTranslator.Protocol.Serializers.Builtin
 {
     public class XmlDtoSerializer : IDtoSerializer
     {

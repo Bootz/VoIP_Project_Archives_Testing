@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using VoipTranslator.Protocol;
 using VoipTranslator.Server.Interfaces;
 using VoipTranslator.Server.Logging;
 
@@ -12,6 +13,7 @@ namespace VoipTranslator.Server.Infrastructure
             builder.RegisterType<PushSender>().As<IPushSender>().SingleInstance();
             builder.RegisterType<UsersRepository>().As<IUsersRepository>().SingleInstance();
             builder.RegisterType<ConsoleLogger>().As<ILogger>().SingleInstance();
+            builder.RegisterType<EmptyUserIdProvider>().As<IUserIdProvider>().SingleInstance();
 
             base.Load(builder);
         }

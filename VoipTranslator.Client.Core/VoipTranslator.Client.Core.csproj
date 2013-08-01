@@ -39,6 +39,7 @@
     <Compile Include="Common\IKeyValueStorage.cs" />
     <Compile Include="Common\ServiceLocator.cs" />
     <Compile Include="Common\StringExtensions.cs" />
+    <Compile Include="Common\UserIdProviderAdapter.cs" />
     <Compile Include="Compasition\LayerModule.cs" />
     <Compile Include="Contracts\BinaryDataEventsArgs.cs" />
     <Compile Include="Contracts\CallEventsArgs.cs" />

@@ -20,8 +20,8 @@ namespace VoipTranslator.Client.WinPhone
 
             var modules = new LayerModule[]
                 {
-                    new ApplicationModule(),
                     new CoreModule(),
+                    new ApplicationModule(),
                 };
 
             modules.ForEach(builder.RegisterModule);

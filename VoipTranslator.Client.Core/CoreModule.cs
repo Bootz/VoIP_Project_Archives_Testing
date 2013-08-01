@@ -1,7 +1,9 @@
 ﻿using Autofac;
+using VoipTranslator.Client.Core.Common;
 using VoipTranslator.Client.Core.Compasition;
 using VoipTranslator.Protocol;
 using VoipTranslator.Protocol.Serializers;
+using VoipTranslator.Protocol.Serializers.Builtin;
 
 namespace VoipTranslator.Client.Core
 {
@@ -16,7 +18,7 @@ namespace VoipTranslator.Client.Core
             builder.RegisterType<CommandBuilder>().AsSelf().SingleInstance();
             builder.RegisterType<CommandSerializer>().As<ICommandSerializer>().SingleInstance();
             builder.RegisterType<XmlDtoSerializer>().As<IDtoSerializer>().SingleInstance();
-
+            builder.RegisterType<UserIdProvider>().As<IUserIdProvider>().SingleInstance();
 
             base.OnMap(builder);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using VoipTranslator.Client.Core.Common;
 using VoipTranslator.Protocol;
 using VoipTranslator.Protocol.Dto;
 
@@ -28,6 +29,7 @@ namespace VoipTranslator.Client.Core
         {
             if (!_accountManager.IsRegistered)
                 throw new InvalidOperationException();
+
 
             var authResult = await Authorize();
             if (authResult.Result == AuthenticationResultType.NotRegistered)

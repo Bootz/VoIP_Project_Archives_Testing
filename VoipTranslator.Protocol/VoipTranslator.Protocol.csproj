@@ -45,6 +45,8 @@
     <Compile Include="Dto\DialResultType.cs" />
     <Compile Include="Dto\PacketEventArgs.cs" />
     <Compile Include="EnumerableExtensions.cs" />
+    <Compile Include="IUserIdProvider.cs" />
+    <Compile Include="Serializers\Builtin\DcDtoSerializer.cs" />
     <Compile Include="ServerAddress.cs" />
     <Compile Include="Dto\AuthenticationResult.cs" />
     <Compile Include="Dto\AuthenticationResultType.cs" />
@@ -53,11 +55,11 @@
     <Compile Include="Dto\RegistrationResult.cs" />
     <Compile Include="Dto\RegistrationResultType.cs" />
     <Compile Include="Serializers\IDtoSerializer.cs" />
-    <Compile Include="Serializers\CommandSerializer.cs" />
+    <Compile Include="Serializers\Builtin\CommandSerializer.cs" />
     <Compile Include="Serializers\ICommandSerializer.cs" />
     <Compile Include="Dto\IncomingCallInfoDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Serializers\XmlDtoSerializer.cs" />
+    <Compile Include="Serializers\Builtin\XmlDtoSerializer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

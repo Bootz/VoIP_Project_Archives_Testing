@@ -17,7 +17,7 @@ namespace VoipTranslator.Client.WinPhone.Infrastructure
                 if (_microphone == null)
                 {
                     _microphone = Microphone.Default;
-                    _microphone.BufferDuration = TimeSpan.FromMilliseconds(500);
+                    _microphone.BufferDuration = TimeSpan.FromMilliseconds(100);
                     _baBuffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
                     _microphone.BufferReady += MicrophoneBufferReady;
                     _microphone.Start();
