@@ -34,12 +34,35 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Folder Include="Entities\Contact\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Entities\RemoteUser.cs" />
-    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\User\IUsersRepository.cs" />
+    <Compile Include="Entities\User\User.cs" />
+    <Compile Include="Entities\User\UserSpecifications.cs" />
+    <Compile Include="Exceptions\EntityNotFoundException.cs" />
+    <Compile Include="Exceptions\InvalidAccessException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seedwork\Entity.cs" />
+    <Compile Include="Seedwork\IRepository.cs" />
+    <Compile Include="Seedwork\ITimer.cs" />
+    <Compile Include="Seedwork\ITransaction.cs" />
+    <Compile Include="Seedwork\ITransactionFactory.cs" />
+    <Compile Include="Seedwork\IUnitOfWork.cs" />
+    <Compile Include="Seedwork\IUnitOfWorkFactory.cs" />
+    <Compile Include="Seedwork\Specifications\AndSpecification.cs" />
+    <Compile Include="Seedwork\Specifications\CompositeSpecification.cs" />
+    <Compile Include="Seedwork\Specifications\DirectSpecification.cs" />
+    <Compile Include="Seedwork\Specifications\ExpressionBuilder.cs" />
+    <Compile Include="Seedwork\Specifications\NotSpecification.cs" />
+    <Compile Include="Seedwork\Specifications\OrSpecification.cs" />
+    <Compile Include="Seedwork\Specifications\ParametersRebinder.cs" />
+    <Compile Include="Seedwork\Specifications\Specification.cs" />
+    <Compile Include="Seedwork\Specifications\TrueSpecification.cs" />
+    <Compile Include="Seedwork\Utils\DateTimeApproximateComparer.cs" />
+    <Compile Include="Seedwork\Utils\EnumerableExtensions.cs" />
+    <Compile Include="Seedwork\Utils\IdentityGenerator.cs" />
+    <Compile Include="Seedwork\ValueObject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
