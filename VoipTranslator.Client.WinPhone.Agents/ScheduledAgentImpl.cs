@@ -21,11 +21,11 @@ namespace VoipTranslator.Client.WinPhone.Agents
             if (incomingCallTask != null)
             {
                 // Parse the the incoming push notification payload
-                IncomingCallInfoDto pushNotification;
+                IncomingCallInfo pushNotification;
                 using (var ms = new MemoryStream(incomingCallTask.MessageBody))
                 {
-                    var xs = new XmlSerializer(typeof(IncomingCallInfoDto));
-                    pushNotification = (IncomingCallInfoDto)xs.Deserialize(ms);
+                    var xs = new XmlSerializer(typeof(IncomingCallInfo));
+                    pushNotification = (IncomingCallInfo)xs.Deserialize(ms);
                 }
 
                 String defaultContactImageUri = Package.Current.InstalledLocation.Path + @"\Assets\DefaultContactImage.jpg";

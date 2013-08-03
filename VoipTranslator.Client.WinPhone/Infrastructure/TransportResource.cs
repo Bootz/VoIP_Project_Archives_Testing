@@ -42,12 +42,12 @@ namespace VoipTranslator.Client.WinPhone.Infrastructure
         {
             try
             {
+                await SemaphoreSlim.WaitAsync();
                 if (!_isServiceBound)
                 {
                     _isServiceBound = true;
                     await BindService();
                 }
-                await SemaphoreSlim.WaitAsync();
                 _dataWriter.WriteString(data);
                 await _dataWriter.StoreAsync();
             }

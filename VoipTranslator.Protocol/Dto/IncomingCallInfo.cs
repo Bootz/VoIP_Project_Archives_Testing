@@ -5,7 +5,7 @@ namespace VoipTranslator.Protocol.Dto
 {
     [XmlType(AnonymousType = true, Namespace = "WPNotification")]
     [XmlRoot(Namespace = "WPNotification", IsNullable = false)]
-    public class IncomingCallInfoDto
+    public class IncomingCallInfo
     {
         [XmlElement(Form = XmlSchemaForm.Unqualified)]
         public string Name { get; set; }

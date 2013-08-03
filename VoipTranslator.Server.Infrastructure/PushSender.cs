@@ -23,13 +23,13 @@ namespace VoipTranslator.Server.Infrastructure
                 byte[] notificationMessage = null;
                 using (var ms = new MemoryStream())
                 {
-                    var notification = new IncomingCallInfoDto
+                    var notification = new IncomingCallInfo
                     {
                         Name = callerName,
                         Number = callerNumber
                     };
 
-                    var xs = new XmlSerializer(typeof(IncomingCallInfoDto));
+                    var xs = new XmlSerializer(typeof(IncomingCallInfo));
                     xs.Serialize(ms, notification);
 
                     notificationMessage = ms.ToArray();
