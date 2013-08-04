@@ -15,15 +15,7 @@ namespace Voip.Server.ConsoleHost
             Bootstrapper.Run();
             Console.WriteLine("Bootstrapper run.");
             string line = string.Empty;
-
-            CultureInfo turkish = CultureInfo.CreateSpecificCulture("tr");
-            //Thread.CurrentThread.CurrentCulture = turkish;
-
-            // In Turkey, "i" does odd things
-            string lower = "i";
-            string upper = "I";
-            var a = lower == upper;
-            
+           
             while (!line.Equals("exit", StringComparison.InvariantCultureIgnoreCase))
             {
                 line = Console.ReadLine();

@@ -44,7 +44,6 @@
     <Compile Include="Dto\DialResult.cs" />
     <Compile Include="Dto\DialResultType.cs" />
     <Compile Include="Dto\PacketEventArgs.cs" />
-    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="IUserIdProvider.cs" />
     <Compile Include="Serializers\Builtin\DcDtoSerializer.cs" />
     <Compile Include="ServerAddress.cs" />

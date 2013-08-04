@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoipTranslator.Server.Domai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoipTranslator.Server.Application", "VoipTranslator.Server.Application\VoipTranslator.Server.Application.csproj", "{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoipTranslator.Infrastructure", "VoipTranslator.Infrastructure\VoipTranslator.Infrastructure.csproj", "{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +147,14 @@ Global
 		{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7}.Release|ARM.ActiveCfg = Release|Any CPU
 		{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7}.Release|x86.ActiveCfg = Release|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Release|ARM.ActiveCfg = Release|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -163,6 +173,7 @@ Global
 		{8B1EB1B1-EBDA-481F-8A4D-F79D8C1333F3} = {565E6A65-0266-43AC-931C-BAD3B19BEEE2}
 		{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7} = {565E6A65-0266-43AC-931C-BAD3B19BEEE2}
 		{0FD033D5-7BFA-42BC-A7B7-90D764EDDF1A} = {667CE415-F847-4404-B138-EF7903D9F1CA}
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6} = {667CE415-F847-4404-B138-EF7903D9F1CA}
 		{D4FD5E6E-64F0-49B3-BE4E-7E89585EE197} = {AF1D281E-D780-41C7-8733-3E405C9388F5}
 	EndGlobalSection
 EndGlobal
