@@ -57,7 +57,6 @@
     <Compile Include="Logging\LogFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IUsersRepository.cs" />
-    <Compile Include="ServiceLocator.cs" />
     <Compile Include="Timer.cs" />
     <Compile Include="VoiceManager.cs" />
   </ItemGroup>

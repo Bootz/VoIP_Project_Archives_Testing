@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using VoipTranslator.Infrastructure;
+using VoipTranslator.Infrastructure.AutoMapping;
 using VoipTranslator.Server.Domain.Seedwork;
 
 namespace VoipTranslator.Server.Application.Seedwork
@@ -14,7 +16,7 @@ namespace VoipTranslator.Server.Application.Seedwork
         public static TProjection ProjectedAs<TProjection>(this Entity entity)
             where TProjection : class,new()
         {
-            var adapter = AutomapperTypeAdapterFactory.Create();
+            var adapter = new AutomapperTypeAdapter();
             return adapter.Adapt<TProjection>(entity);
         }
 
@@ -27,7 +29,7 @@ namespace VoipTranslator.Server.Application.Seedwork
         public static List<TProjection> ProjectedAsCollection<TProjection>(this IEnumerable<Entity> items)
             where TProjection : class,new()
         {
-            var adapter = AutomapperTypeAdapterFactory.Create();
+            var adapter = new AutomapperTypeAdapter();
             return adapter.Adapt<List<TProjection>>(items);
         }
     }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace VoipTranslator.Protocol
+namespace VoipTranslator.Infrastructure
 {
     public static class EnumerableExtensions
     {

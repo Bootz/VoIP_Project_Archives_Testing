@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Autofac;
 
-namespace VoipTranslator.Server
+namespace VoipTranslator.Infrastructure
 {
     public static class ServiceLocator
     {

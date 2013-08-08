@@ -38,11 +38,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapping\AutomapperTypeAdapter.cs" />
-    <Compile Include="AutoMapping\AutomapperTypeAdapterFactory.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceLocator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\Dependencies\Autofac\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="AutoMapper">
       <HintPath>..\Dependencies\AutoMapper\AutoMapper.dll</HintPath>
     </Reference>

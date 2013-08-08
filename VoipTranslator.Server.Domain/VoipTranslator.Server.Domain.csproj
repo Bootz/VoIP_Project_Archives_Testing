@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Folder Include="Entities\Contact\" />
+    <Folder Include="Entities\User\Contact\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\User\IUsersRepository.cs" />
