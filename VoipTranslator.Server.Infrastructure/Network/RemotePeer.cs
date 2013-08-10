@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.Networking;
+using Windows.Storage.Streams;
 using VoipTranslator.Infrastructure.Logging;
 using VoipTranslator.Protocol.Commands;
 using VoipTranslator.Protocol.Serializers;
 using VoipTranslator.Server.Application.Contracts;
 using VoipTranslator.Server.Application.Entities.EventArguments;
-using Windows.Networking;
-using Windows.Storage.Streams;
 
-namespace VoipTranslator.Server.Infrastructure
+namespace VoipTranslator.Server.Infrastructure.Network
 {
     public class RemotePeer : IRemotePeer
     {

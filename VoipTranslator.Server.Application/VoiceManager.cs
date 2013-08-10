@@ -11,16 +11,19 @@ namespace VoipTranslator.Server.Application
     {
         private readonly CommandBuilder _commandBuilder;
         private readonly ConnectionsService _connectionsManager;
+        private readonly ITranslationResource _translationResource;
         private readonly IUserRepository _usersRepository;
         private readonly IPushNotificationResource _pushSender;
 
         public VoiceManager(ConnectionsService connectionsManager,
+            ITranslationResource translationResource,
             IUserRepository usersRepository,
             IPushNotificationResource pushSender,
             CommandBuilder commandBuilder)
         {
             _commandBuilder = commandBuilder;
             _connectionsManager = connectionsManager;
+            _translationResource = translationResource;
             _usersRepository = usersRepository;
             _pushSender = pushSender;
             _connectionsManager.CommandRecieved += _connectionsManager_OnCommandRecieved;
@@ -47,7 +50,12 @@ namespace VoipTranslator.Server.Application
             if (remoteUser.IsInCallWith == null)
                 return;
 
-            remoteUser.IsInCallWith.Peer.SendCommand(command);
+            _translationResource.AppendRawData(_commandBuilder.GetUnderlyingObject<byte[]>(command), 
+                data => 
+                {
+                    _commandBuilder.ChangeUnderlyingObject(command, data);
+                    remoteUser.IsInCallWith.Peer.SendCommand(command);
+                });
         }
 
         private void HandleEndCall(Command command, RemoteUser remoteUser)

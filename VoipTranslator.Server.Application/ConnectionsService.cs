@@ -42,15 +42,6 @@ namespace VoipTranslator.Server.Application
 
         public event EventHandler<RemoteUserCommandEventArgs> CommandRecieved = delegate { };
 
-        public IReadOnlyCollection<RemoteUser> ActiveConnections
-        {
-            get
-            {
-                lock (_activeConnections)
-                    return new ReadOnlyCollection<RemoteUser>(_activeConnections); 
-            }
-        }
-
         public RemoteUser FindRemoteUserByNumber(string number)
         {
             lock (_activeConnections)

@@ -60,6 +60,7 @@
     <Compile Include="Entities\EventArguments\RemoteUserCommandEventArgs.cs" />
     <Compile Include="Seedwork\AppService.cs" />
     <Compile Include="Seedwork\ProjectionsExtensionMethods.cs" />
+    <Compile Include="Contracts\TranslatorService.cs" />
     <Compile Include="VoiceManager.cs" />
   </ItemGroup>
   <ItemGroup>

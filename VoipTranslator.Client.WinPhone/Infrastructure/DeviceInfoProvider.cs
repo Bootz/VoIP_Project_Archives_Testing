@@ -34,7 +34,7 @@ namespace VoipTranslator.Client.WinPhone.Infrastructure
                     manufacturer = output.ToString();
                 return _savedDeviceName = string.Format("{0} {1}", manufacturer, model);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "Unknown";
             }

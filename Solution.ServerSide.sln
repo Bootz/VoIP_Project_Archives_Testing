@@ -5,13 +5,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{565E6A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{667CE415-F847-4404-B138-EF7903D9F1CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoipTranslator.Protocol", "VoipTranslator.Protocol\VoipTranslator.Protocol.csproj", "{0FD033D5-7BFA-42BC-A7B7-90D764EDDF1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoipTranslator.DataTransferObjects", "VoipTranslator.Protocol\VoipTranslator.DataTransferObjects.csproj", "{0FD033D5-7BFA-42BC-A7B7-90D764EDDF1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoipTranslator.Server.ConsoleHost", "VoipTranslator.Server.ConsoleHost\VoipTranslator.Server.ConsoleHost.csproj", "{466C68C4-3126-46C0-AEFF-6A2110AF2CAA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoipTranslator.Server", "VoipTranslator.Server\VoipTranslator.Server.csproj", "{5601FE56-6010-48D8-9185-A4A96021B5BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoipTranslator.Server.Application.ConsoleHost", "VoipTranslator.Server.ConsoleHost\VoipTranslator.Server.Application.ConsoleHost.csproj", "{466C68C4-3126-46C0-AEFF-6A2110AF2CAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoipTranslator.Server.Infrastructure", "VoipTranslator.Server.Infrastructure\VoipTranslator.Server.Infrastructure.csproj", "{1FABF1E0-5D9F-42E1-BFF3-7B108FC5FE66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{42E1F730-46F3-407E-A930-416B3D16D5F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoipTranslator.Server.Domain", "VoipTranslator.Server.Domain\VoipTranslator.Server.Domain.csproj", "{8B1EB1B1-EBDA-481F-8A4D-F79D8C1333F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoipTranslator.Server.Application", "VoipTranslator.Server.Application\VoipTranslator.Server.Application.csproj", "{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoipTranslator.Infrastructure", "VoipTranslator.Infrastructure\VoipTranslator.Infrastructure.csproj", "{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,14 +45,6 @@ Global
 		{466C68C4-3126-46C0-AEFF-6A2110AF2CAA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{466C68C4-3126-46C0-AEFF-6A2110AF2CAA}.Release|ARM.ActiveCfg = Release|Any CPU
 		{466C68C4-3126-46C0-AEFF-6A2110AF2CAA}.Release|x86.ActiveCfg = Release|Any CPU
-		{5601FE56-6010-48D8-9185-A4A96021B5BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5601FE56-6010-48D8-9185-A4A96021B5BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5601FE56-6010-48D8-9185-A4A96021B5BB}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{5601FE56-6010-48D8-9185-A4A96021B5BB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5601FE56-6010-48D8-9185-A4A96021B5BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5601FE56-6010-48D8-9185-A4A96021B5BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5601FE56-6010-48D8-9185-A4A96021B5BB}.Release|ARM.ActiveCfg = Release|Any CPU
-		{5601FE56-6010-48D8-9185-A4A96021B5BB}.Release|x86.ActiveCfg = Release|Any CPU
 		{1FABF1E0-5D9F-42E1-BFF3-7B108FC5FE66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1FABF1E0-5D9F-42E1-BFF3-7B108FC5FE66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FABF1E0-5D9F-42E1-BFF3-7B108FC5FE66}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -55,14 +53,40 @@ Global
 		{1FABF1E0-5D9F-42E1-BFF3-7B108FC5FE66}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1FABF1E0-5D9F-42E1-BFF3-7B108FC5FE66}.Release|ARM.ActiveCfg = Release|Any CPU
 		{1FABF1E0-5D9F-42E1-BFF3-7B108FC5FE66}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B1EB1B1-EBDA-481F-8A4D-F79D8C1333F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B1EB1B1-EBDA-481F-8A4D-F79D8C1333F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B1EB1B1-EBDA-481F-8A4D-F79D8C1333F3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{8B1EB1B1-EBDA-481F-8A4D-F79D8C1333F3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B1EB1B1-EBDA-481F-8A4D-F79D8C1333F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B1EB1B1-EBDA-481F-8A4D-F79D8C1333F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B1EB1B1-EBDA-481F-8A4D-F79D8C1333F3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{8B1EB1B1-EBDA-481F-8A4D-F79D8C1333F3}.Release|x86.ActiveCfg = Release|Any CPU
+		{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7}.Release|x86.ActiveCfg = Release|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Release|ARM.ActiveCfg = Release|Any CPU
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{466C68C4-3126-46C0-AEFF-6A2110AF2CAA} = {565E6A65-0266-43AC-931C-BAD3B19BEEE2}
-		{5601FE56-6010-48D8-9185-A4A96021B5BB} = {565E6A65-0266-43AC-931C-BAD3B19BEEE2}
 		{1FABF1E0-5D9F-42E1-BFF3-7B108FC5FE66} = {565E6A65-0266-43AC-931C-BAD3B19BEEE2}
+		{8B1EB1B1-EBDA-481F-8A4D-F79D8C1333F3} = {565E6A65-0266-43AC-931C-BAD3B19BEEE2}
+		{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7} = {565E6A65-0266-43AC-931C-BAD3B19BEEE2}
 		{0FD033D5-7BFA-42BC-A7B7-90D764EDDF1A} = {667CE415-F847-4404-B138-EF7903D9F1CA}
+		{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6} = {667CE415-F847-4404-B138-EF7903D9F1CA}
 	EndGlobalSection
 EndGlobal

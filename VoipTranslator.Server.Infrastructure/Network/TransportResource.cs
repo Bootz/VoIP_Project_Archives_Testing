@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Globalization;
-using VoipTranslator.Infrastructure.Logging;
-using VoipTranslator.Protocol.Serializers;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
+using VoipTranslator.Infrastructure.Logging;
 using VoipTranslator.Protocol;
+using VoipTranslator.Protocol.Serializers;
 using VoipTranslator.Server.Application.Contracts;
 using VoipTranslator.Server.Application.Entities.EventArguments;
 
-namespace VoipTranslator.Server.Infrastructure
+namespace VoipTranslator.Server.Infrastructure.Network
 {
     public class TransportResource : ICommandsTransportResource
     {

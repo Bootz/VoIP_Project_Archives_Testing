@@ -7,7 +7,6 @@ using System.Windows.Threading;
 using CyclopsToolkit.WinPhone.Navigation;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using VoipTranslator.Client.Core.Common;
 using VoipTranslator.Client.Core.Contracts;
 using VoipTranslator.Infrastructure;
 

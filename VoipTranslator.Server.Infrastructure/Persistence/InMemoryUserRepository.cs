@@ -3,7 +3,7 @@ using System.Linq;
 using VoipTranslator.Server.Domain.Entities.User;
 using VoipTranslator.Server.Domain.Seedwork.Specifications;
 
-namespace VoipTranslator.Server.Infrastructure
+namespace VoipTranslator.Server.Infrastructure.Persistence
 {
     public class InMemoryUserRepository : IUserRepository
     {

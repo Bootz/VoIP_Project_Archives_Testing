@@ -1,16 +1,21 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
+using VoipTranslator.Infrastructure.Logging;
 using VoipTranslator.Protocol;
 using VoipTranslator.Server.Application.Contracts;
 
-namespace VoipTranslator.Server.Infrastructure
+namespace VoipTranslator.Server.Infrastructure.Network
 {
     public class PushNotificationResource : IPushNotificationResource
     {
-        public void SendVoipPush(string pushUrl, string callerNumber, string callerName)
+        private readonly ILogger _logger = LogFactory.GetLogger<PushNotificationResource>();
+
+        public Task<bool> SendVoipPush(string pushUrl, string callerNumber, string callerName)
         {
+            var taskSource = new TaskCompletionSource<bool>();
             // Send a push notification to the push channel URI of this app to simulate an incoming call
             try
             {
@@ -38,7 +43,7 @@ namespace VoipTranslator.Server.Infrastructure
                 // Set the required web request headers
                 sendNotificationRequest.ContentLength = notificationMessage.Length;
                 sendNotificationRequest.ContentType = "text/xml";
-                sendNotificationRequest.Headers["X-NotificationClass"] = "4"; // Class 4 indicates an incoming VoIP call
+                sendNotificationRequest.Headers["X-NotificationClass"] = "4"; // Class 4 means an incoming VoIP call type
 
                 // Write the request body
                 sendNotificationRequest.BeginGetRequestStream(arRequest =>
@@ -60,29 +65,30 @@ namespace VoipTranslator.Server.Infrastructure
                                 string subscriptionStatus = response.Headers["X-SubscriptionStatus"];
                                 string deviceConnectionStatus = response.Headers["X-DeviceConnectionStatus"];
 
-                                // The push notification was sent
-                                //this.ShowResult(string.Format("Notification: {0}\r\nSubscription: {1}\r\nDevice: {2}", notificationStatus, subscriptionStatus, deviceConnectionStatus));
-                                Console.WriteLine("Send push result: Notification: {0}\r\nSubscription: {1}\r\nDevice: {2}", notificationStatus, subscriptionStatus, deviceConnectionStatus);
+                                _logger.Trace("Send push result: Notification: {0}\r\nSubscription: {1}\r\nDevice: {2}", notificationStatus, subscriptionStatus, deviceConnectionStatus);
+
+                                taskSource.TrySetResult(true);
                             }
                             catch (Exception ex)
                             {
-                                Console.WriteLine("Send push error: " + ex.Message);
-                                //this.ShowResult(ex);
+                                taskSource.TrySetResult(false);
+                                _logger.Exception(ex);
                             }
                         }, null);
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Send push error: " + ex.Message);
-                        //this.ShowResult(ex);
+                        taskSource.TrySetResult(false);
+                        _logger.Exception(ex);
                     }
                 }, null);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Send push error: " + ex.Message);
-                //this.ShowResult(ex);
+                taskSource.TrySetResult(false);
+                _logger.Exception(ex);
             }
+            return taskSource.Task;
         }
     }
 }
