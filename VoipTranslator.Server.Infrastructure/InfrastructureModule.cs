@@ -1,8 +1,10 @@
 ﻿using Autofac;
-using VoipTranslator.Protocol;
+using VoipTranslator.Infrastructure.Logging;
 using VoipTranslator.Protocol.Contracts;
-using VoipTranslator.Server.Interfaces;
-using VoipTranslator.Server.Logging;
+using VoipTranslator.Server.Application.Contracts;
+using VoipTranslator.Server.Domain.Entities.User;
+using VoipTranslator.Server.Domain.Seedwork;
+using VoipTranslator.Server.Infrastructure.Persistence;
 
 namespace VoipTranslator.Server.Infrastructure
 {
@@ -10,11 +12,12 @@ namespace VoipTranslator.Server.Infrastructure
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<TransportResource>().As<ITransportResource>().SingleInstance();
-            builder.RegisterType<PushSender>().As<IPushSender>().SingleInstance();
-            builder.RegisterType<UsersRepository>().As<IUsersRepository>().SingleInstance();
+            builder.RegisterType<TransportResource>().As<ICommandsTransportResource>().SingleInstance();
+            builder.RegisterType<PushNotificationResource>().As<IPushNotificationResource>().SingleInstance();
+            builder.RegisterType<InMemoryUserRepository>().As<IUserRepository>().SingleInstance();
             builder.RegisterType<ConsoleLogger>().As<ILogger>().SingleInstance();
             builder.RegisterType<EmptyUserIdProvider>().As<IUserIdProvider>().SingleInstance();
+            builder.RegisterType<TransactionFactoryStub>().As<ITransactionFactory>().SingleInstance();
 
             base.Load(builder);
         }

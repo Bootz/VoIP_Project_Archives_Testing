@@ -50,15 +50,8 @@
     <Compile Include="Seedwork\ITransactionFactory.cs" />
     <Compile Include="Seedwork\IUnitOfWork.cs" />
     <Compile Include="Seedwork\IUnitOfWorkFactory.cs" />
-    <Compile Include="Seedwork\Specifications\AndSpecification.cs" />
-    <Compile Include="Seedwork\Specifications\CompositeSpecification.cs" />
     <Compile Include="Seedwork\Specifications\DirectSpecification.cs" />
-    <Compile Include="Seedwork\Specifications\ExpressionBuilder.cs" />
-    <Compile Include="Seedwork\Specifications\NotSpecification.cs" />
-    <Compile Include="Seedwork\Specifications\OrSpecification.cs" />
-    <Compile Include="Seedwork\Specifications\ParametersRebinder.cs" />
-    <Compile Include="Seedwork\Specifications\Specification.cs" />
-    <Compile Include="Seedwork\Specifications\TrueSpecification.cs" />
+    <Compile Include="Seedwork\Specifications\ISpecification.cs" />
     <Compile Include="Seedwork\Utils\DateTimeApproximateComparer.cs" />
     <Compile Include="Seedwork\Utils\EnumerableExtensions.cs" />
     <Compile Include="Seedwork\Utils\IdentityGenerator.cs" />

@@ -10,12 +10,12 @@ namespace VoipTranslator.Server.Domain.Seedwork.Specifications
     /// </summary>
     /// <typeparam name="TEntity">Type of entity that check this specification</typeparam>
     public sealed class DirectSpecification<TEntity>
-        : Specification<TEntity>
+        : ISpecification<TEntity>
         where TEntity : class
     {
         #region Members
 
-        Expression<Func<TEntity, bool>> _MatchingCriteria;
+        readonly Func<TEntity, bool> _matchingCriteria;
 
         #endregion
 
@@ -25,12 +25,12 @@ namespace VoipTranslator.Server.Domain.Seedwork.Specifications
         /// Default constructor for Direct Specification
         /// </summary>
         /// <param name="matchingCriteria">A Matching Criteria</param>
-        public DirectSpecification(Expression<Func<TEntity, bool>> matchingCriteria)
+        public DirectSpecification(Func<TEntity, bool> matchingCriteria)
         {
-            if (matchingCriteria == (Expression<Func<TEntity, bool>>)null)
+            if (matchingCriteria == null)
                 throw new ArgumentNullException("matchingCriteria");
 
-            _MatchingCriteria = matchingCriteria;
+            _matchingCriteria = matchingCriteria;
         }
 
         #endregion
@@ -41,9 +41,9 @@ namespace VoipTranslator.Server.Domain.Seedwork.Specifications
         /// 
         /// </summary>
         /// <returns></returns>
-        public override Expression<Func<TEntity, bool>> SatisfiedBy()
+        public Func<TEntity, bool> SatisfiedBy()
         {
-            return _MatchingCriteria;
+            return _matchingCriteria;
         }
 
         #endregion

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using VoipTranslator.Protocol;
+using VoipTranslator.Infrastructure.Logging;
 using VoipTranslator.Protocol.Commands;
 using VoipTranslator.Protocol.Serializers;
-using VoipTranslator.Server.Interfaces;
-using VoipTranslator.Server.Logging;
+using VoipTranslator.Server.Application.Contracts;
+using VoipTranslator.Server.Application.Entities.EventArguments;
 using Windows.Networking;
 using Windows.Storage.Streams;
 
@@ -14,19 +14,19 @@ namespace VoipTranslator.Server.Infrastructure
     public class RemotePeer : IRemotePeer
     {
         private readonly ICommandSerializer _serializer;
-        private readonly ITransportResource _transport;
+        private readonly ICommandsTransportResource _transport;
         private readonly DataWriter _dataWriter;
         private static readonly ILogger Logger = LogFactory.GetLogger<RemotePeer>();
         private readonly Dictionary<long, TaskCompletionSource<Command>> _responseWaiters = new Dictionary<long, TaskCompletionSource<Command>>();
 
-        public RemotePeer(ICommandSerializer serializer, ITransportResource transport, IOutputStream stream, HostName host, string port)
+        public RemotePeer(ICommandSerializer serializer, ICommandsTransportResource transport, IOutputStream stream, HostName host, string port)
         {
             _serializer = serializer;
             _transport = transport;
             _dataWriter = new DataWriter(stream);
             HostName = host.RawName;
             Port = port;
-            UpdateLastActivity();
+            HandleActivity();
             _transport.Received += _transport_Received;
         }
 
@@ -91,7 +91,7 @@ namespace VoipTranslator.Server.Infrastructure
 
         public DateTime LastActivity { get; private set; }
 
-        public void UpdateLastActivity()
+        public void HandleActivity()
         {
             LastActivity = DateTime.Now;
         }

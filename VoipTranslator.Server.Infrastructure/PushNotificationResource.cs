@@ -3,11 +3,11 @@ using System.IO;
 using System.Net;
 using System.Xml.Serialization;
 using VoipTranslator.Protocol;
-using VoipTranslator.Server.Interfaces;
+using VoipTranslator.Server.Application.Contracts;
 
 namespace VoipTranslator.Server.Infrastructure
 {
-    public class PushSender : IPushSender
+    public class PushNotificationResource : IPushNotificationResource
     {
         public void SendVoipPush(string pushUrl, string callerNumber, string callerName)
         {

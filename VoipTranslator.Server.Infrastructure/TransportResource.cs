@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Globalization;
+using VoipTranslator.Infrastructure.Logging;
 using VoipTranslator.Protocol.Serializers;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using VoipTranslator.Protocol;
-using VoipTranslator.Server.Interfaces;
-using VoipTranslator.Server.Logging;
+using VoipTranslator.Server.Application.Contracts;
+using VoipTranslator.Server.Application.Entities.EventArguments;
 
 namespace VoipTranslator.Server.Infrastructure
 {
-    public class TransportResource : ITransportResource
+    public class TransportResource : ICommandsTransportResource
     {
         private readonly ICommandSerializer _serializer;
         private readonly DatagramSocket _socket = new DatagramSocket();
@@ -23,7 +25,7 @@ namespace VoipTranslator.Server.Infrastructure
 
         private async void BindService()
         {
-            await _socket.BindServiceNameAsync(ServerAddress.Port.ToString());
+            await _socket.BindServiceNameAsync(ServerAddress.Port.ToString(CultureInfo.InvariantCulture));
             Logger.Debug("BindService completed");
         }
 

@@ -1,5 +1,4 @@
-﻿using VoipTranslator.Protocol;
-using VoipTranslator.Protocol.Contracts;
+﻿using VoipTranslator.Protocol.Contracts;
 
 namespace VoipTranslator.Server.Infrastructure
 {
