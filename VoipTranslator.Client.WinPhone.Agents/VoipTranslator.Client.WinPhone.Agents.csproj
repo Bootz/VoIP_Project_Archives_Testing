@@ -90,9 +90,9 @@
     <Compile Include="ScheduledAgentImpl.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VoipTranslator.Protocol\VoipTranslator.Protocol.csproj">
+    <ProjectReference Include="..\VoipTranslator.Protocol\VoipTranslator.DataTransferObjects.csproj">
       <Project>{0FD033D5-7BFA-42BC-A7B7-90D764EDDF1A}</Project>
-      <Name>VoipTranslator.Protocol</Name>
+      <Name>VoipTranslator.DataTransferObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using VoipTranslator.Server;
-using VoipTranslator.Server.Interfaces;
 
-namespace Voip.Server.ConsoleHost
+namespace VoipTranslator.Server.Application.ConsoleHost
 {
     class Program
     {
@@ -19,18 +13,18 @@ namespace Voip.Server.ConsoleHost
             while (!line.Equals("exit", StringComparison.InvariantCultureIgnoreCase))
             {
                 line = Console.ReadLine();
-                if (line == "pushtest")
-                {
-                    var user = ServiceLocator.Resolve<IUsersRepository>().GetLastUser();
-                    if (user == null)
-                    {
-                        Console.WriteLine("user wasn't found");
-                    }
-                    else
-                    {
-                        ServiceLocator.Resolve<IPushSender>().SendVoipPush(user.PushUri, user.Number, user.Number);
-                    }
-                }
+                //if (line == "pushtest")
+                //{
+                //    var user = ServiceLocator.Resolve<IUsersRepository>().GetLastUser();
+                //    if (user == null)
+                //    {
+                //        Console.WriteLine("user wasn't found");
+                //    }
+                //    else
+                //    {
+                //        ServiceLocator.Resolve<IPushSender>().SendVoipPush(user.PushUri, user.Number, user.Number);
+                //    }
+                //}
             }
         }
     }

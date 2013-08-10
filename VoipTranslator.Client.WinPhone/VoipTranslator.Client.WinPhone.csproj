@@ -204,9 +204,13 @@
       <Project>{67D034AF-3707-4643-8C88-69CF7F57F99F}</Project>
       <Name>VoipTranslator.Client.WinPhone.Agents</Name>
     </ProjectReference>
-    <ProjectReference Include="..\VoipTranslator.Protocol\VoipTranslator.Protocol.csproj">
+    <ProjectReference Include="..\VoipTranslator.Infrastructure\VoipTranslator.Infrastructure.csproj">
+      <Project>{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}</Project>
+      <Name>VoipTranslator.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VoipTranslator.Protocol\VoipTranslator.DataTransferObjects.csproj">
       <Project>{0FD033D5-7BFA-42BC-A7B7-90D764EDDF1A}</Project>
-      <Name>VoipTranslator.Protocol</Name>
+      <Name>VoipTranslator.DataTransferObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

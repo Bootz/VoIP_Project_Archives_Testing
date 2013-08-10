@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using VoipTranslator.Protocol;
+using VoipTranslator.Protocol.Commands;
 
-namespace VoipTranslator.Server.Application
+namespace VoipTranslator.Server.Application.Contracts
 {
     public interface IRemotePeer
     {
@@ -16,6 +17,6 @@ namespace VoipTranslator.Server.Application
 
         DateTime LastActivity { get; }
 
-        void UpdateLastActivity();
+        void HandleActivity();
     }
 }

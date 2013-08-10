@@ -5,6 +5,7 @@ using VoipTranslator.Client.Core;
 using VoipTranslator.Client.Core.Common;
 using VoipTranslator.Client.WinPhone.ViewModels;
 using VoipTranslator.Client.WinPhone.Views;
+using VoipTranslator.Infrastructure;
 
 namespace VoipTranslator.Client.WinPhone.Navigation
 {

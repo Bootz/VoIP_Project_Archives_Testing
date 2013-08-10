@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using Autofac;
-using VoipTranslator.Protocol;
-using VoipTranslator.Protocol.Serializers;
-using VoipTranslator.Server;
+using VoipTranslator.Infrastructure;
 using VoipTranslator.Server.Infrastructure;
 
-namespace Voip.Server.ConsoleHost
+namespace VoipTranslator.Server.Application.ConsoleHost
 {
     public static class Bootstrapper
     {
@@ -22,7 +20,7 @@ namespace Voip.Server.ConsoleHost
             var modules = new List<Module>
                 {
                     new InfrastructureModule(),
-                    new CoreModule(),
+                    new ApplicationModule(),
                 };
 
             foreach (var module in modules)

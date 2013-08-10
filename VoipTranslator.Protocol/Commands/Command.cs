@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace VoipTranslator.Protocol
+namespace VoipTranslator.Protocol.Commands
 {
     public class Command
     {

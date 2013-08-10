@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using VoipTranslator.Protocol;
+using VoipTranslator.Protocol.Contracts;
 using VoipTranslator.Server.Interfaces;
 using VoipTranslator.Server.Logging;
 

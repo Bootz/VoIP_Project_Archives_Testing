@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace VoipTranslator.Server
+namespace VoipTranslator.Infrastructure
 {
-    internal delegate void TimerCallback(object state);
+    public delegate void TimerCallback(object state);
 
-    internal sealed class Timer
+    public sealed class Timer
     {
         private readonly TimerCallback _callback;
         private readonly object _state;
         private readonly TimeSpan _interval;
 
-        internal Timer(TimerCallback callback, object state, TimeSpan interval)
+        public Timer(TimerCallback callback, object state, TimeSpan interval)
         {
             _callback = callback;
             _state = state;

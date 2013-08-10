@@ -8,5 +8,7 @@ namespace VoipTranslator.Server.Domain.Entities.User
         void Add(User user);
 
         IEnumerable<User> AllMatching(Specification<User> specification);
+
+        User FirstMatching(Specification<User> specification);
     }
 }

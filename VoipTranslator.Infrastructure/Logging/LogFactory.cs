@@ -1,6 +1,4 @@
-﻿using VoipTranslator.Client.Core.Common;
-
-namespace VoipTranslator.Client.Core.Logging
+﻿namespace VoipTranslator.Infrastructure.Logging
 {
     public static class LogFactory
     {

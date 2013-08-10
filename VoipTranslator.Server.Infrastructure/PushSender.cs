@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Xml.Serialization;
-using VoipTranslator.Protocol.Dto;
+using VoipTranslator.Protocol;
 using VoipTranslator.Server.Interfaces;
 
 namespace VoipTranslator.Server.Infrastructure

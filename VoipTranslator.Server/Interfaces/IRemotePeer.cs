@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VoipTranslator.Protocol;
+using VoipTranslator.Protocol.Commands;
 
 namespace VoipTranslator.Server.Interfaces
 {

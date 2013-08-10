@@ -4,6 +4,7 @@ using System.Windows.Input;
 using CyclopsToolkit.WinPhone.Controls.Inputs;
 using VoipTranslator.Client.Core;
 using VoipTranslator.Client.Core.Common;
+using VoipTranslator.Infrastructure;
 
 namespace VoipTranslator.Client.WinPhone.ViewModels
 {

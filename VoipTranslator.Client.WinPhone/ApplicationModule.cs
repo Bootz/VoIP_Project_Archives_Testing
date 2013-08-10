@@ -3,11 +3,11 @@ using CyclopsToolkit.WinPhone.Navigation;
 using VoipTranslator.Client.Core.Common;
 using VoipTranslator.Client.Core.Compasition;
 using VoipTranslator.Client.Core.Contracts;
-using VoipTranslator.Client.Core.Logging;
 using VoipTranslator.Client.WinPhone.Infrastructure;
 using VoipTranslator.Client.WinPhone.Navigation;
 using VoipTranslator.Client.WinPhone.ViewModels;
 using VoipTranslator.Client.WinPhone.Views;
+using VoipTranslator.Infrastructure.Logging;
 
 namespace VoipTranslator.Client.WinPhone
 {

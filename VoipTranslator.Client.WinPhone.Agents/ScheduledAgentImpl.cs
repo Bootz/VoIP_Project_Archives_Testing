@@ -6,7 +6,7 @@ using Microsoft.Phone.Networking.Voip;
 using Microsoft.Phone.Scheduler;
 using Windows.ApplicationModel;
 using Windows.Phone.Networking.Voip;
-using VoipTranslator.Protocol.Dto;
+using VoipTranslator.Protocol;
 
 namespace VoipTranslator.Client.WinPhone.Agents
 {

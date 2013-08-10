@@ -1,5 +1,5 @@
 ﻿using System;
-using VoipTranslator.Client.Core.Logging;
+using VoipTranslator.Infrastructure.Logging;
 
 namespace VoipTranslator.Client.WinPhone.Infrastructure
 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VoipTranslator.Protocol;
+using VoipTranslator.Protocol.Commands;
 using VoipTranslator.Protocol.Serializers;
 using VoipTranslator.Server.Interfaces;
 using VoipTranslator.Server.Logging;

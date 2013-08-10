@@ -7,7 +7,6 @@ using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using VoipTranslator.Client.Core.Contracts;
 using VoipTranslator.Protocol;
-using VoipTranslator.Protocol.Dto;
 
 namespace VoipTranslator.Client.WinPhone.Infrastructure
 {

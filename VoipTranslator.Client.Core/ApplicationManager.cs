@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using VoipTranslator.Client.Core.Common;
 using VoipTranslator.Client.Core.Contracts;
 using VoipTranslator.Protocol;
-using VoipTranslator.Protocol.Dto;
+using VoipTranslator.Protocol.Commands;
 
 namespace VoipTranslator.Client.Core
 {

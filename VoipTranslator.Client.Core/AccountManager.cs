@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
 using VoipTranslator.Client.Core.Common;
 using VoipTranslator.Protocol;
-using VoipTranslator.Protocol.Dto;
+using VoipTranslator.Protocol.Commands;
+using VoipTranslator.Protocol.Contracts;
 
 namespace VoipTranslator.Client.Core
 {

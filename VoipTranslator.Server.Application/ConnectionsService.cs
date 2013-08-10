@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using VoipTranslator.Protocol;
+using VoipTranslator.Infrastructure;
+using VoipTranslator.Infrastructure.Logging;
+using VoipTranslator.Protocol.Commands;
 using VoipTranslator.Protocol.Serializers;
+using VoipTranslator.Server.Application.Contracts;
+using VoipTranslator.Server.Application.Entities;
+using VoipTranslator.Server.Application.Entities.EventArguments;
 using VoipTranslator.Server.Application.Seedwork;
 using VoipTranslator.Server.Domain.Entities.User;
 using VoipTranslator.Server.Domain.Seedwork;
@@ -13,10 +18,9 @@ namespace VoipTranslator.Server.Application
 {
     public class ConnectionsService : AppService
     {
-        private static readonly ILogger Logger = LogFactory.GetLogger<ConnectionsManager>();
+        private static readonly ILogger Logger = LogFactory.GetLogger<ConnectionsService>();
         private readonly ICommandSerializer _serializer;
-        private readonly Dictionary<Tuple<string, CommandName>, TaskCompletionSource<Command>> _responceWaiters = new Dictionary<Tuple<string, CommandName>, TaskCompletionSource<Command>>(); 
-        private readonly ITransportResource _resource;
+        private readonly Dictionary<Tuple<string, CommandName>, TaskCompletionSource<Command>> _responceWaiters = new Dictionary<Tuple<string, CommandName>, TaskCompletionSource<Command>>();
         private readonly IUserRepository _userRepository;
         private Timer _timer;
         private readonly List<RemoteUser>_activeConnections = new List<RemoteUser>();
@@ -24,16 +28,15 @@ namespace VoipTranslator.Server.Application
         private static readonly TimeSpan TimerInterval = TimeSpan.FromSeconds(3);
         private static readonly TimeSpan ConnectionTimeout = TimeSpan.FromSeconds(1000);
 
-        public ConnectionsService(ITransportResource resource, 
+        public ConnectionsService(ICommandsTransportResource resource, 
             ITransactionFactory transactionFactory,
             IUserRepository userRepository,
             ICommandSerializer serializer)
             : base(transactionFactory)
         {
-            _resource = resource;
             _userRepository = userRepository;
             _serializer = serializer;
-            _resource.Received += _resource_OnReceived;
+            resource.Received += _resource_OnReceived;
             _timer = new Timer(OnTimerTick, null, TimerInterval);
         }
 
@@ -92,7 +95,7 @@ namespace VoipTranslator.Server.Application
                         }
                     }
 
-                    var user = _userRepository.GetById(command.UserId);
+                    var user = _userRepository.FirstMatching(UserSpecifications.UserId(command.UserId));
                     RemoteUser remoteUser;
                     if (user != null)
                     {
@@ -100,7 +103,7 @@ namespace VoipTranslator.Server.Application
                         if (existedConnection != null)
                         {
                             existedConnection.Peer = e.Peer;
-                            existedConnection.Peer.UpdateLastActivity();
+                            existedConnection.Peer.HandleActivity();
                             remoteUser = existedConnection;
                         }
                         else

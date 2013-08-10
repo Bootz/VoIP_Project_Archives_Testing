@@ -1,6 +1,7 @@
 ﻿using System.Windows.Navigation;
 using CyclopsToolkit.WinPhone.Navigation;
 using VoipTranslator.Client.Core.Common;
+using VoipTranslator.Infrastructure;
 
 namespace VoipTranslator.Client.WinPhone.Views
 {

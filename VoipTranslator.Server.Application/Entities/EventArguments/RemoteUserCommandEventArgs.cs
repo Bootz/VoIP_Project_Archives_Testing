@@ -1,6 +1,6 @@
-﻿using VoipTranslator.Protocol;
+﻿using VoipTranslator.Protocol.Commands;
 
-namespace VoipTranslator.Server.Application
+namespace VoipTranslator.Server.Application.Entities.EventArguments
 {
     public class RemoteUserCommandEventArgs : CommandEventArgs
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VoipTranslator.Protocol.Dto
+namespace VoipTranslator.Protocol
 {
     public class PacketEventArgs : EventArgs
     {

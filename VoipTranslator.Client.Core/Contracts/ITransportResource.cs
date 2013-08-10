@@ -1,5 +1,5 @@
 ﻿using System;
-using VoipTranslator.Protocol.Dto;
+using VoipTranslator.Protocol;
 
 namespace VoipTranslator.Client.Core.Contracts
 {

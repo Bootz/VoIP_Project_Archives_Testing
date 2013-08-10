@@ -1,5 +1,4 @@
 ﻿using System;
-using VoipTranslator.Protocol.Dto;
 
 namespace VoipTranslator.Server.Interfaces
 {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VoipTranslator.Client.Core.Contracts;
-using VoipTranslator.Client.Core.Logging;
+using VoipTranslator.Infrastructure.Logging;
 using VoipTranslator.Protocol;
-using VoipTranslator.Protocol.Dto;
+using VoipTranslator.Protocol.Commands;
 using VoipTranslator.Protocol.Serializers;
 
 namespace VoipTranslator.Client.Core

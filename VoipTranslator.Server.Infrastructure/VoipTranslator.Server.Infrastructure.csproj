@@ -61,13 +61,9 @@
     <Compile Include="UsersRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VoipTranslator.Protocol\VoipTranslator.Protocol.csproj">
+    <ProjectReference Include="..\VoipTranslator.Protocol\VoipTranslator.DataTransferObjects.csproj">
       <Project>{0fd033d5-7bfa-42bc-a7b7-90d764eddf1a}</Project>
-      <Name>VoipTranslator.Protocol</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VoipTranslator.Server\VoipTranslator.Server.csproj">
-      <Project>{5601fe56-6010-48d8-9185-a4a96021b5bb}</Project>
-      <Name>VoipTranslator.Server</Name>
+      <Name>VoipTranslator.DataTransferObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

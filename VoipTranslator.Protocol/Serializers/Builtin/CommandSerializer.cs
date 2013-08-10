@@ -1,4 +1,6 @@
-﻿namespace VoipTranslator.Protocol.Serializers.Builtin
+﻿using VoipTranslator.Protocol.Commands;
+
+namespace VoipTranslator.Protocol.Serializers.Builtin
 {
     public class CommandSerializer : ICommandSerializer
     {

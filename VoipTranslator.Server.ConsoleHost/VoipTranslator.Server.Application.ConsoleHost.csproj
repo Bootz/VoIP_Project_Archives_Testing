@@ -57,17 +57,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VoipTranslator.Protocol\VoipTranslator.Protocol.csproj">
+    <ProjectReference Include="..\VoipTranslator.Infrastructure\VoipTranslator.Infrastructure.csproj">
+      <Project>{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}</Project>
+      <Name>VoipTranslator.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VoipTranslator.Protocol\VoipTranslator.DataTransferObjects.csproj">
       <Project>{0fd033d5-7bfa-42bc-a7b7-90d764eddf1a}</Project>
-      <Name>VoipTranslator.Protocol</Name>
+      <Name>VoipTranslator.DataTransferObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VoipTranslator.Server.Application\VoipTranslator.Server.Application.csproj">
+      <Project>{5C9D2B98-C853-4848-98AC-B3BEB3C5C7E7}</Project>
+      <Name>VoipTranslator.Server.Application</Name>
     </ProjectReference>
     <ProjectReference Include="..\VoipTranslator.Server.Infrastructure\VoipTranslator.Server.Infrastructure.csproj">
       <Project>{1fabf1e0-5d9f-42e1-bff3-7b108fc5fe66}</Project>
       <Name>VoipTranslator.Server.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VoipTranslator.Server\VoipTranslator.Server.csproj">
-      <Project>{5601fe56-6010-48d8-9185-a4a96021b5bb}</Project>
-      <Name>VoipTranslator.Server</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,6 +2,8 @@
 using VoipTranslator.Client.Core.Common;
 using VoipTranslator.Client.Core.Compasition;
 using VoipTranslator.Protocol;
+using VoipTranslator.Protocol.Commands;
+using VoipTranslator.Protocol.Contracts;
 using VoipTranslator.Protocol.Serializers;
 using VoipTranslator.Protocol.Serializers.Builtin;
 

@@ -1,20 +1,22 @@
 ﻿using VoipTranslator.Protocol;
 using VoipTranslator.Protocol.Commands;
-using VoipTranslator.Server.Entities;
-using VoipTranslator.Server.Interfaces;
+using VoipTranslator.Server.Application.Contracts;
+using VoipTranslator.Server.Application.Entities;
+using VoipTranslator.Server.Application.Entities.EventArguments;
+using VoipTranslator.Server.Domain.Entities.User;
 
-namespace VoipTranslator.Server
+namespace VoipTranslator.Server.Application
 {
     public class VoiceManager
     {
         private readonly CommandBuilder _commandBuilder;
-        private readonly ConnectionsManager _connectionsManager;
-        private readonly IUsersRepository _usersRepository;
-        private readonly IPushSender _pushSender;
+        private readonly ConnectionsService _connectionsManager;
+        private readonly IUserRepository _usersRepository;
+        private readonly IPushNotificationResource _pushSender;
 
-        public VoiceManager(ConnectionsManager connectionsManager, 
-            IUsersRepository usersRepository,
-            IPushSender pushSender,
+        public VoiceManager(ConnectionsService connectionsManager,
+            IUserRepository usersRepository,
+            IPushNotificationResource pushSender,
             CommandBuilder commandBuilder)
         {
             _commandBuilder = commandBuilder;
@@ -66,7 +68,7 @@ namespace VoipTranslator.Server
 
             if (opponent == null)
             {
-                var opponentUser = _usersRepository.GetByNumber(callerNumber);
+                var opponentUser = _usersRepository.FirstMatching(UserSpecifications.Number(callerNumber));
                 if (opponentUser != null)
                 {
                     _pushSender.SendVoipPush(opponentUser.PushUri, remoteUser.User.Number, remoteUser.User.Number);

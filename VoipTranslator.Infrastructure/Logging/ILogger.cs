@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VoipTranslator.Client.Core.Logging
+namespace VoipTranslator.Infrastructure.Logging
 {
     public interface ILogger
     {

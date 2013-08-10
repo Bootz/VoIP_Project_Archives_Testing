@@ -1,6 +1,7 @@
-﻿using VoipTranslator.Protocol.Serializers;
+﻿using VoipTranslator.Protocol.Contracts;
+using VoipTranslator.Protocol.Serializers;
 
-namespace VoipTranslator.Protocol
+namespace VoipTranslator.Protocol.Commands
 {
     public class CommandBuilder
     {

@@ -2,28 +2,27 @@
 using System.Linq;
 using VoipTranslator.Protocol;
 using VoipTranslator.Protocol.Commands;
-using VoipTranslator.Server.Entities;
-using VoipTranslator.Server.Interfaces;
+using VoipTranslator.Server.Application.Entities;
+using VoipTranslator.Server.Application.Entities.EventArguments;
+using VoipTranslator.Server.Domain.Entities.User;
 
-namespace VoipTranslator.Server
+namespace VoipTranslator.Server.Application
 {
     public class AccountService
     {
         private readonly CommandBuilder _commandBuilder;
-        private readonly ConnectionsManager _connectionsManager;
-        private readonly IUsersRepository _usersRepository;
+        private readonly IUserRepository _usersRepository;
 
-        public AccountService(ConnectionsManager connectionsManager, 
-            IUsersRepository usersRepository,
+        public AccountService(ConnectionsService connectionsService, 
+            IUserRepository usersRepository,
             CommandBuilder commandBuilder)
         {
             _commandBuilder = commandBuilder;
-            _connectionsManager = connectionsManager;
             _usersRepository = usersRepository;
-            _connectionsManager.CommandRecieved += _connectionsManager_OnCommandRecieved;
+            connectionsService.CommandRecieved += _connectionsManager_OnCommandRecieved;
         }
 
-        private void _connectionsManager_OnCommandRecieved(object sender, Interfaces.RemoteUserCommandEventArgs e)
+        private void _connectionsManager_OnCommandRecieved(object sender, RemoteUserCommandEventArgs e)
         {
             switch (e.Command.Name)
             {
@@ -65,7 +64,7 @@ namespace VoipTranslator.Server
             var request = _commandBuilder.GetUnderlyingObject<AuthenticationRequest>(command);
             var result = new AuthenticationResult();
 
-            var user = _usersRepository.GetById(request.UserId);
+            var user = _usersRepository.FirstMatching(UserSpecifications.UserId(request.UserId));
             if (user != null)
             {
                 result.Result = AuthenticationResultType.Success;

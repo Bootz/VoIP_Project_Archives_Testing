@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using VoipTranslator.Protocol;
-using VoipTranslator.Protocol.Dto;
+using VoipTranslator.Protocol.Commands;
 using VoipTranslator.Protocol.Serializers;
 using VoipTranslator.Server.Entities;
 using VoipTranslator.Server.Interfaces;

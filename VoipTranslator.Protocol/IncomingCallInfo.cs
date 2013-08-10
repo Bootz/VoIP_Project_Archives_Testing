@@ -1,7 +1,7 @@
 ﻿using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace VoipTranslator.Protocol.Dto
+namespace VoipTranslator.Protocol
 {
     [XmlType(AnonymousType = true, Namespace = "WPNotification")]
     [XmlRoot(Namespace = "WPNotification", IsNullable = false)]

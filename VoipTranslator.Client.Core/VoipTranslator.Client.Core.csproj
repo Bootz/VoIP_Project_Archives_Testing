@@ -37,7 +37,6 @@
     <Compile Include="ApplicationManager.cs" />
     <Compile Include="CallsManager.cs" />
     <Compile Include="Common\IKeyValueStorage.cs" />
-    <Compile Include="Common\ServiceLocator.cs" />
     <Compile Include="Common\StringExtensions.cs" />
     <Compile Include="Common\UserIdProviderAdapter.cs" />
     <Compile Include="Compasition\LayerModule.cs" />
@@ -48,8 +47,6 @@
     <Compile Include="Contracts\ITransportResource.cs" />
     <Compile Include="Contracts\IUIDispatcher.cs" />
     <Compile Include="CoreModule.cs" />
-    <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Logging\LogFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransportManager.cs" />
   </ItemGroup>
@@ -60,9 +57,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\VoipTranslator.Protocol\VoipTranslator.Protocol.csproj">
+    <ProjectReference Include="..\VoipTranslator.Infrastructure\VoipTranslator.Infrastructure.csproj">
+      <Project>{E6CE5BC9-F00F-4A23-8064-35EB692B6DD6}</Project>
+      <Name>VoipTranslator.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VoipTranslator.Protocol\VoipTranslator.DataTransferObjects.csproj">
       <Project>{0FD033D5-7BFA-42BC-A7B7-90D764EDDF1A}</Project>
-      <Name>VoipTranslator.Protocol</Name>
+      <Name>VoipTranslator.DataTransferObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

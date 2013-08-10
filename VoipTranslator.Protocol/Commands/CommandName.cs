@@ -1,4 +1,4 @@
-﻿namespace VoipTranslator.Protocol
+﻿namespace VoipTranslator.Protocol.Commands
 {
     public enum CommandName
     {

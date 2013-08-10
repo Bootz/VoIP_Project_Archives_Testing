@@ -1,4 +1,4 @@
-﻿namespace VoipTranslator.Protocol.Dto
+﻿namespace VoipTranslator.Protocol
 {
     public enum DialResultType
     {

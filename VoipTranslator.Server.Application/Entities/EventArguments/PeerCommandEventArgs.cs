@@ -1,6 +1,7 @@
 ﻿using VoipTranslator.Protocol;
+using VoipTranslator.Server.Application.Contracts;
 
-namespace VoipTranslator.Server.Interfaces
+namespace VoipTranslator.Server.Application.Entities.EventArguments
 {
     public class PeerCommandEventArgs : PacketEventArgs
     {
