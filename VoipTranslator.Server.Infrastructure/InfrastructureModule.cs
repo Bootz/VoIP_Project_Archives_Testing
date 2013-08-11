@@ -19,6 +19,7 @@ namespace VoipTranslator.Server.Infrastructure
             builder.RegisterType<ConsoleLogger>().As<ILogger>().SingleInstance();
             builder.RegisterType<EmptyUserIdProvider>().As<IUserIdProvider>().SingleInstance();
             builder.RegisterType<TransactionFactoryStub>().As<ITransactionFactory>().SingleInstance();
+            builder.RegisterType<TranslationResource>().As<ITranslationResource>().SingleInstance();
 
             base.Load(builder);
         }

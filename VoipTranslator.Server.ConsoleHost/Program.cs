@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using VoipTranslator.Infrastructure;
+using VoipTranslator.Server.Application.Contracts;
 
 namespace VoipTranslator.Server.Application.ConsoleHost
 {
@@ -9,7 +12,9 @@ namespace VoipTranslator.Server.Application.ConsoleHost
             Bootstrapper.Run();
             Console.WriteLine("Bootstrapper run.");
             string line = string.Empty;
-           
+
+            ServiceLocator.Resolve<ITranslationResource>().AppendRawData(File.ReadAllBytes("D:\\raw.data"), b => { });
+
             while (!line.Equals("exit", StringComparison.InvariantCultureIgnoreCase))
             {
                 line = Console.ReadLine();

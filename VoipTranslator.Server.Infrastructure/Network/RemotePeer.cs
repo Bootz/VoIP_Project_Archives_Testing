@@ -17,7 +17,7 @@ namespace VoipTranslator.Server.Infrastructure.Network
         private readonly ICommandsTransportResource _transport;
         private readonly DataWriter _dataWriter;
         private static readonly ILogger Logger = LogFactory.GetLogger<RemotePeer>();
-        private readonly Dictionary<long, TaskCompletionSource<Command>> _responseWaiters = new Dictionary<long, TaskCompletionSource<Command>>();
+        private readonly Dictionary<string, TaskCompletionSource<Command>> _responseWaiters = new Dictionary<string, TaskCompletionSource<Command>>();
 
         public RemotePeer(ICommandSerializer serializer, ICommandsTransportResource transport, IOutputStream stream, HostName host, string port)
         {

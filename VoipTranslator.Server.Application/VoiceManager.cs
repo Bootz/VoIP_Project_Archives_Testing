@@ -39,10 +39,20 @@ namespace VoipTranslator.Server.Application
                 case CommandName.VoicePacket:
                     HandleVoicePacket(e.Command, e.RemoteUser);
                     break;
+                case CommandName.VoiceTranslatedPacket:
+                    HandleVoiceTranslatedPacket(e.Command, e.RemoteUser);
+                    break;
                 case CommandName.EndCall:
                     HandleEndCall(e.Command, e.RemoteUser);
                     break;
             }
+        }
+
+        private void HandleVoiceTranslatedPacket(Command command, RemoteUser remoteUser)
+        {
+            if (remoteUser.IsInCallWith == null)
+                return;
+            remoteUser.IsInCallWith.Peer.SendCommand(command);
         }
 
         private void HandleVoicePacket(Command command, RemoteUser remoteUser)

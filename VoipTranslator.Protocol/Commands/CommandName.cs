@@ -5,6 +5,7 @@
         Dial,
         Answer,
         VoicePacket,
+        VoiceTranslatedPacket,
         IncomingCall,
         Register,
         Authentication,

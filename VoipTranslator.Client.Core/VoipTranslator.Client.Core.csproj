@@ -42,6 +42,7 @@
     <Compile Include="Compasition\LayerModule.cs" />
     <Compile Include="Contracts\BinaryDataEventsArgs.cs" />
     <Compile Include="Contracts\CallEventsArgs.cs" />
+    <Compile Include="Contracts\IVoiceSynthesizer.cs" />
     <Compile Include="Contracts\IAudioDeviceResource.cs" />
     <Compile Include="Contracts\IDeviceInfoProvider.cs" />
     <Compile Include="Contracts\ITransportResource.cs" />

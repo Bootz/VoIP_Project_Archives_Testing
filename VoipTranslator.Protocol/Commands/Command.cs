@@ -1,15 +1,13 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace VoipTranslator.Protocol.Commands
 {
     public class Command
     {
-        private static long _lastId = 0;
-
         public Command()
         {
-            Interlocked.Increment(ref _lastId);
-            PacketId = _lastId;
+            PacketId = Guid.NewGuid().ToString("B");
         }
 
         public Command(CommandName name, string body) : this()
@@ -20,7 +18,7 @@ namespace VoipTranslator.Protocol.Commands
 
         public CommandName Name { get; set; }
 
-        public long PacketId { get; set; }
+        public string PacketId { get; set; }
 
         public bool IsLast { get; set; }
 

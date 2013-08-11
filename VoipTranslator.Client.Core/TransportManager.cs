@@ -15,7 +15,7 @@ namespace VoipTranslator.Client.Core
         private static readonly ILogger Logger = LogFactory.GetLogger<ILogger>();
         private readonly ITransportResource _resource;
         private readonly ICommandSerializer _serializer;
-        private readonly Dictionary<long, TaskCompletionSource<Command>> _responseWaiters = new Dictionary<long,TaskCompletionSource<Command>>();
+        private readonly Dictionary<string, TaskCompletionSource<Command>> _responseWaiters = new Dictionary<string, TaskCompletionSource<Command>>();
 
         public TransportManager(ITransportResource resource, ICommandSerializer serializer)
         {

@@ -15,6 +15,7 @@ namespace VoipTranslator.Client.WinPhone
 
         public async Task<string> InitAndGetPushUri()
         {
+            return "";
             var pushUri = await GetPushUri();
             if (!_agentsAreInited)
             {
@@ -32,14 +33,10 @@ namespace VoipTranslator.Client.WinPhone
             if (httpChannel == null)
             {
                 httpChannel = new HttpNotificationChannel(AppPushChannel);
-                httpChannel.ChannelUriUpdated += (s, e) => taskSource.TrySetResult(e.ChannelUri.ToString());
-                httpChannel.ErrorOccurred += (s, e) => taskSource.TrySetResult(string.Empty);
                 httpChannel.Open();
             }
-            else
-            {
-                taskSource.TrySetResult(httpChannel.ChannelUri.ToString());
-            }
+            httpChannel.ChannelUriUpdated += (s, e) => taskSource.TrySetResult(e.ChannelUri.ToString());
+            httpChannel.ErrorOccurred += (s, e) => taskSource.TrySetResult(string.Empty);
             return taskSource.Task;
         }
 
